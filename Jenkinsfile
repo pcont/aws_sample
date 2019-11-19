@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.6.0'
-            args '-v /root/.m2:/root/.m2'
+            args "-v /root/.m2:/root/.m2"
         }
     }
 
@@ -19,9 +19,17 @@ pipeline {
         }
         stage('Publish build info') {
             steps {
-                rtPublishBuildInfo(
-                        serverId: "artifactoryId"
-                )
+                def uploadSpec ="""{
+  "files": [
+    {
+      "pattern": "target/**.jar",
+      "target": "libs-release-local"
+    }
+ ]
+}
+"""
+                server.upload spec: uploadSpec
+
             }
         }
     }
