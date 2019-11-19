@@ -17,19 +17,19 @@ pipeline {
                 }
             }
         }
-        stage('Publish build info') {
+        stage('Uplaod jar') {
             steps {
-                def uploadSpec ="""{
-  "files": [
-    {
-      "pattern": "target/**.jar",
-      "target": "libs-release-local"
-    }
- ]
-}
-"""
-                server.upload spec: uploadSpec
-
+                rtUpload(
+                        serverId: 'artifactoryId',
+                        spec: '''{
+          "files": [
+            {
+              "pattern": "*/*.jar",
+              "target": "libs-release-local/"
+            }
+         ]
+    }'''
+                )
             }
         }
     }
