@@ -19,7 +19,7 @@ pipeline {
         }
         stage('deploy'){
             steps{
-                sh 'mvn deploy:deploy -e -X'
+                sh 'mvn deploy -e -X'
             }
         }
 //        stage('Uplaod jar') {
