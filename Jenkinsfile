@@ -17,24 +17,12 @@ pipeline {
                 }
             }
         }
-        stage('deploy'){
-            steps{
-                sh 'mvn deploy -s doc/settings.xml'
-            }
+        stage('set version'){
+            sh 'mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
         }
-//        stage('Uplaod jar') {
-//            steps {
-//                rtUpload(
-//                        serverId: 'artifactoryId',
-//                        spec: '''{
-//                              "files": [
-//                                {
-//                                  "pattern": "target/*.jar",
-//                                  "target": "libs-release-local/"
-//                                }
-//                             ]
-//                        }'''
-//                )
+//        stage('deploy'){
+//            steps{
+//                sh 'mvn deploy -s doc/settings.xml'
 //            }
 //        }
     }
