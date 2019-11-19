@@ -7,11 +7,11 @@ pipeline {
     }
 
     stages {
-        stage('set version') {
-            steps {
-                sh 'mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
-            }
-        }
+//        stage('set version') {
+//            steps {
+//                sh 'mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
+//            }
+//        }
         stage('build') {
             steps {
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
@@ -34,4 +34,4 @@ pipeline {
             archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
         }
     }
-}
+}K
