@@ -22,13 +22,13 @@ pipeline {
                 rtUpload(
                         serverId: 'artifactoryId',
                         spec: '''{
-                                  "files": [
-                                    {
-                                      "pattern": "target/*.jar",
-                                      "target": "libs-release-local/"
-                                    }
-                                 ]
-                            }'''
+                              "files": [
+                                {
+                                  "pattern": "target/*.jar",
+                                  "target": "libs-release-local/"
+                                }
+                             ]
+                        }'''
                 )
             }
         }
