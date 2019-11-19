@@ -20,9 +20,7 @@ pipeline {
         stage('Publish build info') {
             steps {
                 rtPublishBuildInfo(
-                        serverId: "artifactoryId",
-                        specPath: 'target/*.jar',
-                        failNoOp: true
+                        serverId: "artifactoryId"
                 )
             }
         }
