@@ -11,11 +11,17 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package -Dbuild.number=${BUILD_NUMBER}'
             }
-            post{
-                always{
-                    junit 'target/surefire-reports/*.xml'
-                }
+        }
+
+        stage('test') {
+            steps {
+                sh 'mvn test'
             }
+                post{
+                    always{
+                        junit 'target/surefire-reports/*.xml'
+                    }
+                }
         }
     }
 
