@@ -144,7 +144,7 @@
         <distributionManagement>
             <repository>
                 <id>artifactoryId</id>
-                <url>https://artifactory:8081/artifactory/libs-staging-local/</url>
+                <url>http://artifactory:8081/artifactory/libs-snapshot-local/</url>
             </repository>
         </distributionManagement>
 
