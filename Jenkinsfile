@@ -17,21 +17,24 @@ pipeline {
                 }
             }
         }
-        stage('Uplaod jar') {
-            steps {
-                rtUpload(
-                        serverId: 'artifactoryId',
-                        spec: '''{
-                              "files": [
-                                {
-                                  "pattern": "target/*.jar",
-                                  "target": "libs-release-local/"
-                                }
-                             ]
-                        }'''
-                )
-            }
+        stage('deploy'){
+            sh 'mvn deploy:deploy'
         }
+//        stage('Uplaod jar') {
+//            steps {
+//                rtUpload(
+//                        serverId: 'artifactoryId',
+//                        spec: '''{
+//                              "files": [
+//                                {
+//                                  "pattern": "target/*.jar",
+//                                  "target": "libs-release-local/"
+//                                }
+//                             ]
+//                        }'''
+//                )
+//            }
+//        }
     }
 
     post {
