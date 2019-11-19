@@ -24,7 +24,7 @@ services:
       - /home/frank/development/projects/takeda/data/bitbucket:/var/atlassian/application-data/bitbucket
 
   jenkins:
-     image: jenkins/jenkins:lts
+     image: jenkinsci/blueocean
      ports:
       - 8080:8080
       - 50000:50000
