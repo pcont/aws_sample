@@ -7,6 +7,15 @@ pipeline {
     }
 
     stages {
+        stage('Artifactory configuration'){
+            id: 'ArtifactoryId',
+            url: 'http://artifactory',
+            // If you're using username and password:
+            username: 'admin',
+            password: 'password'
+            // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+            bypassProxy: true
+        }
         stage('build') {
             steps {
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
@@ -15,6 +24,14 @@ pipeline {
                 always{
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage ('Publish build info') {
+           steps {
+                rtPublishBuildInfo (
+                    serverId: "ArtifactoryId",
+                    specPath: 'target/*.jar'
+                )
             }
         }
     }
