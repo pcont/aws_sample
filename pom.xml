@@ -144,8 +144,9 @@
         <distributionManagement>
             <repository>
                 <id>artifactoryId</id>
+
 <!--                <name>My Pkfit Artifactory</name>-->
-<!--                <url>https://package-repo.mypkfit.com/artifactory/libs-staging-local</url>-->
+                <url>https://artifactory:8081/artifactory/libs-staging-local</url>
             </repository>
         </distributionManagement>
 
