@@ -40,6 +40,7 @@ pipeline {
                     echo "git push http://${GIT_USERNAME}:${GIT_PASSWORD}@bitbucket:7990/scm/tkd/simple.git  tag_${BUILD_NUMBER}"
                     sh ('git status')
                     sh("git tag -a tag_${BUILD_NUMBER} -m 'Tagging ${BUILD_NUMBER}'")
+                    echo 'tag set'
                     sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@bitbucket:7990/scm/tkd/simple.git  tag_${BUILD_NUMBER}")
                 }
             }
