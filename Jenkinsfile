@@ -7,6 +7,11 @@ pipeline {
     }
 
     stages {
+        stage('Env'){
+            steps{
+                echo "printenv"
+            }
+        }
         stage('Set Version') {
             steps {
                 sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
