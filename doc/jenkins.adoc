@@ -2,14 +2,15 @@
 
 == Setup
 
+=== Pipeline
 . Create multi branch pipeline
 . Configure branch sources
 +
 image::jenkins/branch-souces.png[jenkins branch source config]
 
-. Settings.xml
-+
-Add settings.xml as a config file
+=== Settings xml
+
+. Add settings.xml as a config file
 +
 image::jenkins/config-file.png[Config Files]
 +
@@ -22,3 +23,15 @@ You will need it later on.
     configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
         sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
     }
+
+=== Define git user
+
+. Manage Jenkins
++
+image::jenkins/manage-jenkins.png[Manage Jenkins]
+. Configure System
+. Git plugin
++
+fill field
++
+image::jenkins/git-user-name.png[Adding Git User Name]

@@ -39,7 +39,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh ("git checkout ${GIT_BRANCH}")
                     sh("git tag -a tag_${BUILD_NUMBER} -m 'Tagging ${BUILD_NUMBER}'")
-                    sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git  tag_${BUILD_NUMBER}")
+                    sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git tag_${BUILD_NUMBER}")
                 }
             }
         }
