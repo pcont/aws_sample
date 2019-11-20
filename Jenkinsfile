@@ -27,7 +27,6 @@ pipeline {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
                     sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
                 }
-
             }
         }
     }
