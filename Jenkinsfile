@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.6.0'
-            args "-v /root/.m2:/root/.m2"
+            args '-v /root/.m2:/root/.m2'
         }
     }
 
@@ -24,14 +24,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy -s doc/settings.xml'
+                sh 'mvn deploy'
             }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
         }
     }
 }
