@@ -129,8 +129,8 @@
     <distributionManagement>
         <repository>
             <id>artifactoryId</id>
-            <!--<url>http://artifactory:8081/artifactory/libs-snapshot-local/</url>-->
-            <url>http://127.0.0.1:8081/artifactory/libs-snapshot-local/</url>
+            <url>http://artifactory:8081/artifactory/libs-snapshot-local/</url>
+<!--            <url>http://127.0.0.1:8081/artifactory/libs-snapshot-local/</url>-->
         </repository>
     </distributionManagement>
 
