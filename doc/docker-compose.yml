@@ -6,7 +6,7 @@ services:
     ports:
      - 8081:8081
     volumes:
-     - /home/frank/development/projects/takeda/data/artifactory:/var/opt/jfrog/artifactory
+     - ./artifactory:/var/opt/jfrog/artifactory
     restart: always
     ulimits:
       nproc: 65535
@@ -21,7 +21,7 @@ services:
       - 7990:7990
       - 7999:7999
      volumes:
-      - /home/frank/development/projects/takeda/data/bitbucket:/var/atlassian/application-data/bitbucket
+      - ./bitbucket:/var/atlassian/application-data/bitbucket
 
   jenkins:
      image: jenkinsci/blueocean
@@ -30,7 +30,7 @@ services:
       - 8080:8080
       - 50000:50000
      volumes:
-      - /home/frank/development/projects/takeda/data/jenkins:/var/jenkins_home
+      - ./jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock 
      privileged: true
 
@@ -40,8 +40,8 @@ services:
      ports:
       - 9000:9000
      volumes:
-      - /home/frank/development/projects/takeda/data/sonar/conf:/opt/sonarqube/conf
-      - /home/frank/development/projects/takeda/data/sonar/logs:/opt/sonarqube/logs
-      - /home/frank/development/projects/takeda/data/sonar/extensions:/opt/sonarqube/extensions
-      - /home/frank/development/projects/takeda/data/sonar/data:/opt/sonarqube/data
+      - ./sonar/conf:/opt/sonarqube/conf
+      - ./sonar/logs:/opt/sonarqube/logs
+      - ./sonar/extensions:/opt/sonarqube/extensions
+      - ./sonar/data:/opt/sonarqube/data
      privileged: true
