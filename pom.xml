@@ -129,9 +129,10 @@
     <distributionManagement>
         <repository>
             <id>artifactoryId</id>
-<!--            <url>http://artifactory:8081/artifactory/libs-snapshot-local/</url>-->
-<!--            <url>http://127.0.0.1:8081/artifactory/libs-snapshot-local/</url>-->
-            <url>http://172.17.0.1:8081/artifactory/libs-snapshot-local/</url>
+<!--            from dev -->
+            <url>http://127.0.0.1:8081/artifactory/libs-release-local/</url>
+<!--            from local jenkins -->
+<!--            <url>http://172.17.0.1:8081/artifactory/libs-snapshot-local/</url>-->
         </repository>
     </distributionManagement>
 
