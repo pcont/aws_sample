@@ -1,0 +1,24 @@
+= Jenkins
+
+== Setup
+
+. Create multi branch pipeline
+. Configure branch sources
++
+image::jenkins/branch-souces.png[jenkins branch source config]
+
+. Settings.xml
++
+Add settings.xml as a config file
++
+image::jenkins/config-file.png[Config Files]
++
+Add a `Maven settings.xml` file type.
+Give an Id (e.g. global-settings-xml).
+You will need it later on.
+
+. Use the settings.xml file in Jenkins file
++
+    configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
+        sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
+    }

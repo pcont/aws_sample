@@ -7,27 +7,38 @@ pipeline {
     }
 
     stages {
-        stage('build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package -Dbuild.number=${BUILD_NUMBER}'
+        stage('Current environment variables'){
+            steps{
+                sh "printenv"
             }
         }
-
-        stage('test') {
-            steps {
-                sh 'mvn test'
+        stage('Set Version') {
+            when{
+                branch "develop"
             }
-                post{
-                    always{
-                        junit 'target/surefire-reports/*.xml'
-                    }
+            steps {
+                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
                 }
+            }
         }
-    }
-
-    post{
-        always{
-            archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
+        stage('Deploy') {
+            when{
+                branch "develop"
+            }
+            steps {
+                configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
+                    sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
+                }
+            }
         }
     }
 }

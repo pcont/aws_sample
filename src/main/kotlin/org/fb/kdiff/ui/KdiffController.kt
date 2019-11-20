@@ -48,7 +48,7 @@ class ActionCellFactory : Callback<TableColumn<DiffItem, ImageView>, TableCell<D
     }
 }
 
-class ActionCell() : TableCell<DiffItem, ImageView>() {
+class ActionCell : TableCell<DiffItem, ImageView>() {
     private val imageView = ImageView(Image(ClassPathResource("/icons/chevron_left_black_18x18.png").inputStream))
 
     override fun updateItem(item: ImageView?, empty: Boolean) {
