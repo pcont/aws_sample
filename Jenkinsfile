@@ -6,18 +6,19 @@ pipeline {
         }
     }
 
-    environment{
+    environment {
         DEPLOY_BRANCH = 'develop'
+        GIT_CREDENTIAL_ID = 'admin'
     }
 
     stages {
-        stage('Current environment variables'){
-            steps{
+        stage('Current environment variables') {
+            steps {
                 sh "printenv"
             }
         }
         stage('Set Version') {
-            when{
+            when {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
@@ -34,8 +35,20 @@ pipeline {
                 }
             }
         }
+        stage('Tag Version') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh ("git checkout ${GIT_BRANCH}")
+                    sh("git tag -a tag_${BUILD_NUMBER} -m 'Tagging ${BUILD_NUMBER}'")
+                    sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git tag_${BUILD_NUMBER}")
+                }
+            }
+        }
         stage('Deploy') {
-            when{
+            when {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
