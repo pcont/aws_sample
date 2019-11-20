@@ -6,6 +6,10 @@ pipeline {
         }
     }
 
+    environment{
+        DEPLOY_BRANCH = 'develop'
+    }
+
     stages {
         stage('Current environment variables'){
             steps{
@@ -14,7 +18,7 @@ pipeline {
         }
         stage('Set Version') {
             when{
-                branch "develop"
+                branch "${DEPLOY_BRANCH}"
             }
             steps {
                 sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
@@ -32,7 +36,7 @@ pipeline {
         }
         stage('Deploy') {
             when{
-                branch "develop"
+                branch "${DEPLOY_BRANCH}"
             }
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
