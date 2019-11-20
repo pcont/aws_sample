@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy -s doc/settings.xml'
+                sh 'mvn deploy'
             }
         }
     }
