@@ -6,18 +6,18 @@ pipeline {
         }
     }
 
-    environment{
+    environment {
         DEPLOY_BRANCH = 'develop'
     }
 
     stages {
-        stage('Current environment variables'){
-            steps{
+        stage('Current environment variables') {
+            steps {
                 sh "printenv"
             }
         }
         stage('Set Version') {
-            when{
+            when {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
@@ -35,13 +35,15 @@ pipeline {
             }
         }
         stage('Tag Version') {
-            withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                sh("git tag -a some_tag${BUILD_NUMBER} -m 'Jenkins'")
-                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@<REPO> --tags')
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh("git tag -a some_tag${BUILD_NUMBER} -m 'Jenkins'")
+                    sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@<REPO> --tags')
+                }
             }
         }
         stage('Deploy') {
-            when{
+            when {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
