@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Env'){
             steps{
-                echo "printenv"
+                sh "printenv"
             }
         }
         stage('Set Version') {
