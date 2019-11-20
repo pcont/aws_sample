@@ -37,13 +37,8 @@ pipeline {
         stage('Tag Version') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh('git config user.name "admin"')
-                    sh('git config user.email "admin@m.com"')
                     sh ("git checkout ${GIT_BRANCH}")
-                    echo "git push http://${GIT_USERNAME}:${GIT_PASSWORD}@bitbucket:7990/scm/tkd/simple.git  tag_${BUILD_NUMBER}"
-                    sh ('git status')
                     sh("git tag -a tag_${BUILD_NUMBER} -m 'Tagging ${BUILD_NUMBER}'")
-                    echo 'tag set'
                     sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git  tag_${BUILD_NUMBER}")
                 }
             }
