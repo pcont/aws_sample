@@ -22,11 +22,11 @@ pipeline {
                 }
             }
         }
-//        stage('deploy'){
-//            steps{
-//                sh 'mvn deploy -s doc/settings.xml'
-//            }
-//        }
+        stage('deploy') {
+            steps {
+                sh 'mvn deploy -s doc/settings.xml'
+            }
+        }
     }
 
     post {
