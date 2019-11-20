@@ -36,6 +36,9 @@ pipeline {
             }
         }
         stage('Tag Version') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             steps {
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh ("git checkout ${GIT_BRANCH}")
