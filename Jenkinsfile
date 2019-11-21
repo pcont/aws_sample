@@ -39,11 +39,11 @@ pipeline {
 //            when {
 //                branch "${DEPLOY_BRANCH}"
 //            }
+            environment {
+                PROJECT_VERSION = sh("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
+                TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
+            }
             steps {
-                environment{
-                    PROJECT_VERSION = sh ("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
-                    TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
-                }
 
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
