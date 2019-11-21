@@ -50,7 +50,7 @@ pipeline {
                 }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
-                GIT_URL_WITH_AUTH = 'grr url'
+                GIT_URL_WITH_AUTH = "${GIT_URL}.replace('://', '://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}@')"
 //                GIT_URL_WITH_AUTH = """${
 //                    sh(
 //                            returnStdout: true,
