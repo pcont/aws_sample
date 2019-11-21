@@ -40,7 +40,11 @@ pipeline {
 //                branch "${DEPLOY_BRANCH}"
 //            }
             environment {
-                PROJECT_VERSION = sh("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
+//                PROJECT_VERSION = sh("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
+                PROJECT_VERSION = """$sh(
+                    returnStdout: true,
+                    script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+                    )}"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
             }
             steps {
