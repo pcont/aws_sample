@@ -44,10 +44,9 @@ pipeline {
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
             }
             steps {
-
+                echo "${TAG_VALUE}"
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
-//                    sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
                     sh("git checkout ${GIT_BRANCH}")
                     sh("git tag ${TAG_VALUE}")
                     sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git ${TAG_VALUE}")
