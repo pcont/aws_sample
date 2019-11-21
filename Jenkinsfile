@@ -52,36 +52,17 @@ pipeline {
                 }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
-                GIT_URL_WITH_AUTH =   authUrl(
+                GIT_URL_WITH_AUTH = authUrl(
+                        cred: "${GIT_CREDENTIAL_ID}",
                         url: "${GIT_URL}",
                         usr: "${GIT_ACCESS_USR}",
                         psw: "${GIT_ACCESS_PSW}"
                 )
-
-//                GIT_URL_WITH_AUTH = """${
-//                    sh(
-//                            returnStdout: true,
-//                            script: '"my://test".replace("://", "://response")'
-//                    )
-//                }"""
-
-
-//                GIT_URL_WITH_AUTH = """${
-//                    sh(
-//                            returnStdout: true,
-//                            script: "my://test.replace('://', '://response')"
-////                            script: '"${GIT_URL}".replace("://", "://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}@")'
-//                    )
-//                }"""
             }
             steps {
-
-                sh "printenv"
-//                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh("git checkout ${GIT_BRANCH}")
                 sh("git tag ${TAG_VALUE}")
                 sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
-//                }
             }
         }
         stage('Deploy') {
