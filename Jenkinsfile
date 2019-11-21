@@ -39,9 +39,9 @@ pipeline {
             }
         }
         stage('Tag Version') {
-//            when {
-//                branch "${DEPLOY_BRANCH}"
-//            }
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             environment {
 //                todo investigate snapshot case
                 PROJECT_VERSION = """${
@@ -50,7 +50,7 @@ pipeline {
                             script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                     )
                 }"""
-                TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
+                TAG_VALUE = "V_${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
             }
             steps {
