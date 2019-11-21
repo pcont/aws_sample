@@ -1,3 +1,5 @@
+@Library('jenkins-shared@master') _
+
 pipeline {
     agent {
         docker {
