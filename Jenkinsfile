@@ -39,9 +39,9 @@ pipeline {
             }
         }
         stage('Tag Version') {
-            when {
-                branch "${DEPLOY_BRANCH}"
-            }
+//            when {
+//                branch "${DEPLOY_BRANCH}"
+//            }
             environment {
 //                todo investigate snapshot case
                 PROJECT_VERSION = """${
