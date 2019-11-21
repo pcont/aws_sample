@@ -51,7 +51,6 @@ pipeline {
                     )
                 }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
-//                GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
                 GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
             }
             steps {
