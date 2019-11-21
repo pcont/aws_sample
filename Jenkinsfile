@@ -44,7 +44,8 @@ pipeline {
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
             }
             steps {
-                echo "${TAG_VALUE}"
+                echo "pv ${PROJECT_VERSION}"
+                echo "tv ${TAG_VALUE}"
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
                     sh("git checkout ${GIT_BRANCH}")
