@@ -77,7 +77,7 @@ pipeline {
 //                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh("git checkout ${GIT_BRANCH}")
                 sh("git tag ${TAG_VALUE}")
-                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
+//                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
 //                }
             }
         }
