@@ -53,7 +53,8 @@ pipeline {
                 GIT_URL_WITH_AUTH = """${
                     sh(
                             returnStdout: true,
-                            script: "${GIT_URL}.replace('://', '://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}')"
+                            script: "my://test.replace('://', '://response')"
+//                            script: "${GIT_URL}.replace('://', '://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}')"
                     )
                 }"""
             }
