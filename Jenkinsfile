@@ -52,6 +52,10 @@ pipeline {
                 }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
+                GIT_URL_WITH_AUTH =   authUrl(
+                        url: "${GIT_URL}"
+                )
+
 //                GIT_URL_WITH_AUTH = """${
 //                    sh(
 //                            returnStdout: true,
@@ -69,10 +73,7 @@ pipeline {
 //                }"""
             }
             steps {
-                authUrl(
-                        url: "${GIT_URL}"
 
-                )
                 sh "printenv"
 //                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh("git checkout ${GIT_BRANCH}")
