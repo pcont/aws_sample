@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.6.0'
-            args '-v /root/.m2:/root/.m2'
+            args '-v /root/.m2:/root/.m2 --network=data_default'
         }
     }
 
@@ -15,6 +15,7 @@ pipeline {
         stage('Current environment variables') {
             steps {
                 sh "printenv"
+                sh "docker network ls"
             }
         }
         stage('Set Version') {
