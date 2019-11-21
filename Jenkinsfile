@@ -15,7 +15,6 @@ pipeline {
         stage('Current environment variables') {
             steps {
                 sh "printenv"
-                sh "docker network ls"
             }
         }
         stage('Set Version') {
