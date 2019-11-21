@@ -50,16 +50,19 @@ pipeline {
                 }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
-                GIT_URL_WITH_AUTH = """${sh(
+                GIT_URL_WITH_AUTH = """${
+                    sh(
                             returnStdout: true,
-                            script: '${GIT_URL}.replace("://", "://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}")'
-                    )}"""
+                            script: "${GIT_URL}.replace('://', '://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}')"
+                    )
+                }"""
             }
             steps {
+                sh "printenv"
 //                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh("git checkout ${GIT_BRANCH}")
-                    sh("git tag ${TAG_VALUE}")
-                    sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
+                sh("git checkout ${GIT_BRANCH}")
+                sh("git tag ${TAG_VALUE}")
+                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
 //                }
             }
         }
