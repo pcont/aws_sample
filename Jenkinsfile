@@ -18,6 +18,7 @@ pipeline {
             }
         }
         stage('Set Version') {
+//            todo remove this stage
             when {
                 branch "${DEPLOY_BRANCH}"
             }
@@ -36,11 +37,11 @@ pipeline {
             }
         }
         stage('Tag Version') {
-//            when {
-//                branch "${DEPLOY_BRANCH}"
-//            }
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             environment {
-//                PROJECT_VERSION = sh("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
+//                todo investigate snapshot case
                 PROJECT_VERSION = """${sh(
                     returnStdout: true,
                     script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
@@ -48,10 +49,7 @@ pipeline {
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
             }
             steps {
-                echo "pv ${PROJECT_VERSION}"
-                echo "tv ${TAG_VALUE}"
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-
                     sh("git checkout ${GIT_BRANCH}")
                     sh("git tag ${TAG_VALUE}")
                     sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git ${TAG_VALUE}")
