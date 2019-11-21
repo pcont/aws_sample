@@ -43,7 +43,7 @@ pipeline {
 //                PROJECT_VERSION = sh("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
                 PROJECT_VERSION = """${sh(
                     returnStdout: true,
-                    script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
+                    script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                     )}"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
             }
