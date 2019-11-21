@@ -19,15 +19,15 @@ pipeline {
                 sh "printenv"
             }
         }
-        stage('Set Version') {
-//            todo remove this stage
-            when {
-                branch "${DEPLOY_BRANCH}"
-            }
-            steps {
-                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
-            }
-        }
+//        stage('Set Version') {
+////            todo remove this stage
+//            when {
+//                branch "${DEPLOY_BRANCH}"
+//            }
+//            steps {
+//                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
+//            }
+//        }
         stage('Build') {
             steps {
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
