@@ -42,22 +42,25 @@ pipeline {
 //            }
             environment {
 //                todo investigate snapshot case
-                PROJECT_VERSION = """${sh(
-                    returnStdout: true,
-                    script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                    )}"""
+                PROJECT_VERSION = """${
+                    sh(
+                            returnStdout: true,
+                            script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+                    )
+                }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
+                GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
+                GIT_URL_WITH_AUTH = """${sh(
+                            returnStdout: true,
+                            script: '${GIT_URL}.replace("://", "://${GIT_ACCESS_USR}:${GIT_ACCESS_PSW}")'
+                    )}"""
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+//                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh("git checkout ${GIT_BRANCH}")
                     sh("git tag ${TAG_VALUE}")
-                    GIT_URL_WITH_AUTH = """${sh(
-                            returnStdout: true,
-                            script: '${GIT_URL}.replace("://", "://${GIT_USERNAME}:${GIT_PASSWORD}")'
-                    )}"""
                     sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
-                }
+//                }
             }
         }
         stage('Deploy') {
