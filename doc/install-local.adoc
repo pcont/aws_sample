@@ -15,7 +15,7 @@ or
 
 I used `/home/frank/development/projects/takeda/data`. don't forget to change the values in the `docker-compose.yml` file to reflect this.
 
-    mkdir -p /data/{jenkins,artifactory,bitbucket}
+    mkdir -p /data/{jenkins,artifactory,bitbucket,sonar}
     chmod -R 777 /data
 
 You need to change mod, otherwise, the apps will have permission problems.
