@@ -58,10 +58,7 @@ pipeline {
                             script: '"my://test".replace("://", "://response")'
                     )
                 }"""
-                authUrl(
-                        url: "${GIT_URL}"
 
-                )
 
 //                GIT_URL_WITH_AUTH = """${
 //                    sh(
@@ -72,6 +69,10 @@ pipeline {
 //                }"""
             }
             steps {
+                authUrl(
+                        url: "${GIT_URL}"
+
+                )
                 sh "printenv"
 //                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh("git checkout ${GIT_BRANCH}")
