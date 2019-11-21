@@ -41,7 +41,7 @@ pipeline {
 //            }
             environment {
 //                PROJECT_VERSION = sh("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
-                PROJECT_VERSION = """$sh(
+                PROJECT_VERSION = """${sh(
                     returnStdout: true,
                     script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
                     )}"""
