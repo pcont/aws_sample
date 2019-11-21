@@ -56,6 +56,11 @@ pipeline {
                             script: '"my://test".replace("://", "://response")'
                     )
                 }"""
+                authUrl(
+                        url: "${GIT_URL}"
+
+                )
+
 //                GIT_URL_WITH_AUTH = """${
 //                    sh(
 //                            returnStdout: true,
