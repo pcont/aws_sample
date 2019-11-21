@@ -52,11 +52,7 @@ pipeline {
                 }"""
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
-                GIT_URL_WITH_AUTH = authUrl(
-                        url: "${GIT_URL}",
-                        usr: "${GIT_ACCESS_USR}",
-                        psw: "${GIT_ACCESS_PSW}"
-                )
+                GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_ACCESS_USR}", "${GIT_ACCESS_PSW}"
             }
             steps {
                 sh("git checkout ${GIT_BRANCH}")
