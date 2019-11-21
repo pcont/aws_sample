@@ -42,8 +42,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 
-                    sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
-                    sh ("mvn build-helper:evaluate -q -Dexpression=project.version")
+//                    sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
+                    sh ("mvn help:evaluate -Dexpression=project.version -q -DforceStdout")
                     sh("git checkout ${GIT_BRANCH}")
                     sh("git tag -a tag_${BUILD_NUMBER} -m 'Tagging ${BUILD_NUMBER}'")
                     sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git tag_${BUILD_NUMBER}")
