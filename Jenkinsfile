@@ -52,6 +52,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh("git checkout ${GIT_BRANCH}")
                     sh("git tag ${TAG_VALUE}")
+//                    todo do not use hard codded server name
                     sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git ${TAG_VALUE}")
                 }
             }
