@@ -39,9 +39,9 @@ pipeline {
             }
         }
         stage('Tag Version') {
-//            when {
-//                branch "${DEPLOY_BRANCH}"
-//            }
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             environment {
 //                todo investigate snapshot case
                 PROJECT_VERSION = """${
@@ -53,7 +53,6 @@ pipeline {
                 TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_ACCESS = credentials("${GIT_CREDENTIAL_ID}")
                 GIT_URL_WITH_AUTH = authUrl(
-                        cred: "${GIT_CREDENTIAL_ID}",
                         url: "${GIT_URL}",
                         usr: "${GIT_ACCESS_USR}",
                         psw: "${GIT_ACCESS_PSW}"
