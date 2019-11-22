@@ -1,29 +1,24 @@
+@Library('pipeline-shared@master') _
+
 pipeline {
     agent {
         docker {
             image 'maven:3.6.0'
-            args '-v /root/.m2:/root/.m2'
+            args '-v /root/.m2:/root/.m2 --network=data_default'
         }
     }
 
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
+        POM = readMavenPom()
+        PROJECT_VERSION = "${POM.version}"
     }
 
     stages {
         stage('Current environment variables') {
             steps {
                 sh "printenv"
-            }
-        }
-        stage('Set Version') {
-//            todo remove this stage
-            when {
-                branch "${DEPLOY_BRANCH}"
-            }
-            steps {
-                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
             }
         }
         stage('Build') {
@@ -41,20 +36,13 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             environment {
-//                todo investigate snapshot case
-                PROJECT_VERSION = """${sh(
-                    returnStdout: true,
-                    script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                    )}"""
-                TAG_VALUE = "${PROJECT_VERSION}.${BUILD_NUMBER}"
+                TAG_VALUE = "V_${PROJECT_VERSION}.${BUILD_NUMBER}"
+                GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIAL_ID}", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh("git checkout ${GIT_BRANCH}")
-                    sh("git tag ${TAG_VALUE}")
-//                    todo do not use hard codded server name
-                    sh("git push http://${GIT_USERNAME}:${GIT_PASSWORD}@172.17.0.1:7990/scm/tkd/simple.git ${TAG_VALUE}")
-                }
+                sh("git checkout ${GIT_BRANCH}")
+                sh("git tag ${TAG_VALUE}")
+                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
             }
         }
         stage('Deploy') {
