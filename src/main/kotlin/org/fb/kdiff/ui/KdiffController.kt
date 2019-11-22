@@ -28,25 +28,20 @@ class KdiffController {
         val urlConnection: URLConnection = filter.openConnection()
         val iss: InputStream = urlConnection.getInputStream()
 
-        val m = Manifest(iss)
-
-        manifest.text = m.mainAttributes
+        manifest.text = Manifest(iss).mainAttributes
                 .map { (key, value) -> "${key}:\t$value" }
                 .joinToString(prefix = "Manifest\n", separator = "\n")
     }
 
     private fun candidates(): List<URL> {
-        val resources: Enumeration<URL> = Thread.currentThread().contextClassLoader
-                .getResources("/META-INF/MANIFEST.MF")
+        val resources: Enumeration<URL> = Thread.currentThread().contextClassLoader.getResources("/META-INF/MANIFEST.MF")
 
-        val resources2: Enumeration<URL> = Thread.currentThread().contextClassLoader
-                .getResources("META-INF/MANIFEST.MF")
+        val resources2: Enumeration<URL> = Thread.currentThread().contextClassLoader.getResources("META-INF/MANIFEST.MF")
 
         val list1 = resources.toList()
         val list2 = resources2.toList()
 
-        val l21 = list2 - list1
-        return l21
+        return list2 - list1
     }
 
     private fun currentJar(): String {
