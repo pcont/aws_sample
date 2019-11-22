@@ -19,6 +19,8 @@ pipeline {
         stage('Current environment variables') {
             steps {
                 sh "printenv"
+                echo "${POM_ARTIFACTID}"
+                echo "$POM_ARTIFACTID"
             }
         }
         stage('Build') {
