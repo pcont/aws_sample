@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component
 import java.io.InputStream
 import java.net.URL
 import java.net.URLConnection
-import java.util.*
 import java.util.jar.Manifest
 
 
@@ -34,14 +33,10 @@ class KdiffController {
     }
 
     private fun candidates(): List<URL> {
-        val resources: Enumeration<URL> = Thread.currentThread().contextClassLoader.getResources("/META-INF/MANIFEST.MF")
+        val urls1 = Thread.currentThread().contextClassLoader.getResources("/META-INF/MANIFEST.MF").toList()
+        val urls2 = Thread.currentThread().contextClassLoader.getResources("META-INF/MANIFEST.MF").toList()
 
-        val resources2: Enumeration<URL> = Thread.currentThread().contextClassLoader.getResources("META-INF/MANIFEST.MF")
-
-        val list1 = resources.toList()
-        val list2 = resources2.toList()
-
-        return list2 - list1
+        return urls2 - urls1
     }
 
     private fun currentJar(): String {
