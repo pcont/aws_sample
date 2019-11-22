@@ -1,64 +1,47 @@
 package org.fb.kdiff.ui
 
-import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.scene.control.TableCell
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
-import javafx.scene.image.Image
-import javafx.scene.image.ImageView
-import javafx.util.Callback
-import org.fb.kdiff.app.FileService
-import org.fb.kdiff.domain.DiffItem
-import org.fb.kdiff.domain.PathRequest
-import org.springframework.core.io.ClassPathResource
+import javafx.scene.control.Label
 import org.springframework.stereotype.Component
-import java.nio.file.Path
+import java.io.InputStream
+import java.net.URL
+import java.net.URLConnection
+import java.util.jar.Manifest
+
 
 @Component
-class KdiffController(private val fileService: FileService) {
-
-    private val diffItems = FXCollections.observableArrayList<DiffItem>()
-
-    private val request = PathRequest(
-            Path.of("/home/frank/development/frbo/kotlin/kdiff_pics/mimacom"),
-            Path.of("/home/frank/development/frbo/kotlin/kdiff_pics/target"),
-            Path.of("/")
-    )
+class KdiffController {
 
     @FXML
-    private lateinit var diffTable: TableView<DiffItem>
-    @FXML
-    private lateinit var actionColumn: TableColumn<DiffItem, ImageView>
+    private lateinit var manifest: Label
 
     @FXML
     fun initialize() {
-//        actionColumn.cellValueFactory = PropertyValueFactory<DiffItem, ImageView>("leftIcon")
-        actionColumn.cellFactory = ActionCellFactory()
-        diffTable.items = diffItems
 
-        val filesAt = fileService.filesAt(request)
-        diffItems.setAll(filesAt)
+        val jarName = currentJar()
+        val other = "${jarName}!/META-INF/MANIFEST.MF"
+
+        val candidates = candidates()
+        val filter = candidates.first { it.path.contains(other) }
+
+        val urlConnection: URLConnection = filter.openConnection()
+        val iss: InputStream = urlConnection.getInputStream()
+
+        manifest.text = Manifest(iss).mainAttributes
+                .map { (key, value) -> "${key}:\t$value" }
+                .joinToString(prefix = "Manifest\n", separator = "\n")
     }
-}
 
-class ActionCellFactory : Callback<TableColumn<DiffItem, ImageView>, TableCell<DiffItem, ImageView>> {
-    override fun call(param: TableColumn<DiffItem, ImageView>): TableCell<DiffItem, ImageView> {
-        return ActionCell()
+    private fun candidates(): List<URL> {
+        val urls1 = Thread.currentThread().contextClassLoader.getResources("/META-INF/MANIFEST.MF").toList()
+        val urls2 = Thread.currentThread().contextClassLoader.getResources("META-INF/MANIFEST.MF").toList()
+
+        return urls2 - urls1
     }
-}
 
-class ActionCell : TableCell<DiffItem, ImageView>() {
-    private val imageView = ImageView(Image(ClassPathResource("/icons/chevron_left_black_18x18.png").inputStream))
-
-    override fun updateItem(item: ImageView?, empty: Boolean) {
-        super.updateItem(item, empty)
-
-        if (empty) {
-            text = null
-            graphic = null
-        } else {
-            graphic = imageView
-        }
+    private fun currentJar(): String {
+        val path = this::javaClass.javaClass.protectionDomain.codeSource.location.path
+        val sub = path.substring(1, path.indexOf(".jar") + ".jar".length)
+        return sub.substring(sub.lastIndexOf("/") + 1)
     }
 }
