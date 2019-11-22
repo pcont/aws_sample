@@ -11,7 +11,7 @@ pipeline {
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
-        POM = readMavenPom
+        POM = readMavenPom()
     }
 
     stages {
