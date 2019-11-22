@@ -11,7 +11,7 @@
 
     <groupId>org.simple</groupId>
     <artifactId>simple</artifactId>
-    <version>11.22.33</version>
+    <version>11.22.33.42</version>
 
     <name>simple-jar</name>
     <description>Showing and merging folders</description>

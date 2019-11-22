@@ -11,8 +11,7 @@ pipeline {
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
-        POM = readMavenPom()
-        PROJECT_VERSION = "${POM.version}"
+        PROJECT_VERSION = projectVersion()
     }
 
     stages {
@@ -36,7 +35,7 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             environment {
-                TAG_VALUE = "V_${PROJECT_VERSION}.${BUILD_NUMBER}"
+                TAG_VALUE = "V_${PROJECT_VERSION}"
                 GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
             }
             steps {
@@ -49,9 +48,11 @@ pipeline {
             when {
                 branch "${DEPLOY_BRANCH}"
             }
+//            todo deploy without rebuilding (if possible)
+//            beware of the jar name
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
+                    sh 'mvn deploy -s $MAVEN_SETTINGS_XML -Dmaven.install.skip'
                 }
             }
         }
