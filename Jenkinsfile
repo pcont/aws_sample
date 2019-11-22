@@ -11,6 +11,7 @@ pipeline {
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
+        VERSION = readMavenPom().getVersion()
     }
 
     stages {
@@ -19,15 +20,14 @@ pipeline {
                 sh "printenv"
             }
         }
-//        stage('Set Version') {
-////            todo remove this stage
-//            when {
-//                branch "${DEPLOY_BRANCH}"
-//            }
-//            steps {
-//                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
-//            }
-//        }
+        stage('Set Version') {
+//            todo remove this stage
+            steps {
+
+
+                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
