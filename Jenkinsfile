@@ -22,11 +22,11 @@ pipeline {
         }
         stage('Set Version') {
 //            todo remove this stage
-            steps {
-
-
-                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
-            }
+//            steps {
+//
+//
+//                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
+//            }
         }
         stage('Build') {
             steps {
