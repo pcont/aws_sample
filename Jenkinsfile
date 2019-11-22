@@ -11,7 +11,7 @@ pipeline {
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
-        PROJECT_VERSION = projectVersion
+        PROJECT_VERSION = projectVersion()
     }
 
     stages {
