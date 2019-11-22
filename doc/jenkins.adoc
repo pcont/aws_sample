@@ -35,3 +35,11 @@ image::jenkins/manage-jenkins.png[Manage Jenkins]
 fill field
 +
 image::jenkins/git-user-name.png[Adding Git User Name]
+
+=== Jenkins Plugins
+
+Some plugins are needed for running the pipelines
+
+. Pipeline Utility Steps
++
+Used for extracting the pom's project version
