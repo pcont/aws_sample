@@ -1,16 +1,48 @@
 = Jenkins
 
-== Setup
+== Configure Jenkins
 
-=== Pipeline
+=== Plugins
+
+Some plugins are needed for running the pipelines
+
+Pipeline Utility Steps
+
+Used for extracting the pom's project version
+
+=== Configure System
+
+Go to Manage Jenkins -> Configure System
+
+image::jenkins/manage-jenkins.png[Configure system]
+
+=== Global Library
+
+Configure the Global Pipeline Libraries
+
+This is the libraries used for the pipeline. I.e. scripts are located there
+
+image::jenkins/global-pipeline-libraries.png[Library config]
+The library name `pipeline-shard` is used in the jenkins file!
+So make sure the name is correct.
+We stored the lib at: `https://package-repo.mypkfit.com/bitbucket/scm/inf/build-pipeline.git`
+We should have some system user for accessing the repository. In the picture, this is my personal login.
+
+=== Configure Git
+
+Git plugin
+
+image::jenkins/git-user-name.png[Adding Git User Name]
+
+== Configure the Pipeline
 . Create multi branch pipeline
 . Configure branch sources
 +
 image::jenkins/branch-souces.png[jenkins branch source config]
 
-=== Settings xml
-
-. Add settings.xml as a config file
+. Settings xml
++
+Add settings.xml as a config file
 +
 image::jenkins/config-file.png[Config Files]
 +
@@ -23,15 +55,3 @@ You will need it later on.
     configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
         sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
     }
-
-=== Define git user
-
-. Manage Jenkins
-+
-image::jenkins/manage-jenkins.png[Manage Jenkins]
-. Configure System
-. Git plugin
-+
-fill field
-+
-image::jenkins/git-user-name.png[Adding Git User Name]

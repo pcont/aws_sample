@@ -1,4 +1,4 @@
-@Library('jenkins-shared@master') _
+@Library('pipeline-shared@master') _
 
 pipeline {
     agent {
@@ -11,6 +11,8 @@ pipeline {
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
+        POM = readMavenPom()
+        PROJECT_VERSION = "${POM.version}"
     }
 
     stages {
@@ -19,15 +21,6 @@ pipeline {
                 sh "printenv"
             }
         }
-//        stage('Set Version') {
-////            todo remove this stage
-//            when {
-//                branch "${DEPLOY_BRANCH}"
-//            }
-//            steps {
-//                sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\${parsedVersion.majorVersion}.\\${parsedVersion.minorVersion}.\\${build.number} versions:commit -Dbuild.number=${BUILD_NUMBER}'
-//            }
-//        }
         stage('Build') {
             steps {
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
@@ -43,13 +36,6 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             environment {
-//                todo investigate snapshot case
-                PROJECT_VERSION = """${
-                    sh(
-                            returnStdout: true,
-                            script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                    )
-                }"""
                 TAG_VALUE = "V_${PROJECT_VERSION}.${BUILD_NUMBER}"
                 GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
             }
