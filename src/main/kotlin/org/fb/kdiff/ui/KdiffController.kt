@@ -18,33 +18,14 @@ class KdiffController {
 
     @FXML
     fun initialize() {
-        val resources: Enumeration<URL> = Thread.currentThread().contextClassLoader
-                .getResources("META-INF/MANIFEST.MF")
 
+        val jarName = currentJar()
+        val other = "${jarName}!/META-INF/MANIFEST.MF"
 
-        val protectionDomain = this::javaClass.javaClass.protectionDomain
-        val codeSource = protectionDomain.codeSource
-        val location = codeSource.location
-        val path = location.path
-        println("path $path")
-        var sub = path.substring(1, path.indexOf(".jar") + 4)
-        println("sub $sub")
+        val candidates = candidates()
+        val filter = candidates.first { it.path.contains(other) }
 
-        sub = sub.substring(sub.lastIndexOf("/") + 1)
-        println("sub $sub")
-
-        val other = "${sub}!/META-INF/MANIFEST.MF"
-        println(other)
-        val rls = mutableListOf<URL>()
-        for (rr in resources) {
-            if (rr.path.contains(other))
-                rls.add(rr)
-        }
-
-        for (rl in rls)
-            println(rl)
-
-        val urlConnection: URLConnection = rls[0].openConnection()
+        val urlConnection: URLConnection = filter.openConnection()
         val iss: InputStream = urlConnection.getInputStream()
 
         val m = Manifest(iss)
@@ -52,5 +33,25 @@ class KdiffController {
         manifest.text = m.mainAttributes
                 .map { (key, value) -> "${key}:\t$value" }
                 .joinToString(prefix = "Manifest\n", separator = "\n")
+    }
+
+    private fun candidates(): List<URL> {
+        val resources: Enumeration<URL> = Thread.currentThread().contextClassLoader
+                .getResources("/META-INF/MANIFEST.MF")
+
+        val resources2: Enumeration<URL> = Thread.currentThread().contextClassLoader
+                .getResources("META-INF/MANIFEST.MF")
+
+        val list1 = resources.toList()
+        val list2 = resources2.toList()
+
+        val l21 = list2 - list1
+        return l21
+    }
+
+    private fun currentJar(): String {
+        val path = this::javaClass.javaClass.protectionDomain.codeSource.location.path
+        val sub = path.substring(1, path.indexOf(".jar") + ".jar".length)
+        return sub.substring(sub.lastIndexOf("/") + 1)
     }
 }
