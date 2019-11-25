@@ -75,13 +75,15 @@ pipeline {
         stage('Push Artifact Version to Repository') {
             environment {
                 GIT_VERSION_URL = authUrl 'http://bitbucket:7990/scm/tkd/deploy-local.git', "${GIT_CREDENTIAL_ID}"
+                GIT_AUTH = credentialsId( "${GIT_CREDENTIAL_ID}")
             }
             steps {
                 dir('artifactVersions') {
                     sh('''
+git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
 git add "version-code.yml"
 git commit -m "frbo commit message"
-git push  "${GIT_VERSION_URL}"
+git push  'http://bitbucket:7990/scm/tkd/deploy-local.git'
 ''')
                 }
             }
