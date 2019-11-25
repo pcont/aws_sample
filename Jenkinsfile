@@ -80,10 +80,12 @@ pipeline {
             steps {
                 dir('artifactVersions') {
                     sh('''
+git config --list
 git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
 git add "version-code.yml"
 git commit -m "frbo commit message"
 git push  'http://bitbucket:7990/scm/tkd/deploy-local.git'
+git config --list
 ''')
                 }
             }
