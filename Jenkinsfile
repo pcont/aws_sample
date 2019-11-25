@@ -75,16 +75,16 @@ pipeline {
 //            }
             steps {
                 updateVersion()
-
-                script { YML_CONTENT = readYaml(file: 'artifactVersions/version-code.yml') }
-                echo "${YML_CONTENT.package_versions}"
-
-                script { "${YML_CONTENT}.package_versions.${ARTIFACT_ID} = ${PROJECT_VERSION}" }
-
-                sh("rm artifactVersions/version-code.yml")
-
-                echo "${YML_CONTENT}"
-                writeYaml file: 'artifactVersions/version-code.yml', data: "${YML_CONTENT}"
+//
+//                script { YML_CONTENT = readYaml(file: 'artifactVersions/version-code.yml') }
+//                echo "${YML_CONTENT.package_versions}"
+//
+//                script { "${YML_CONTENT}.package_versions.${ARTIFACT_ID} = ${PROJECT_VERSION}" }
+//
+//                sh("rm artifactVersions/version-code.yml")
+//
+//                echo "${YML_CONTENT}"
+//                writeYaml file: 'artifactVersions/version-code.yml', data: "${YML_CONTENT}"
             }
         }
     }
