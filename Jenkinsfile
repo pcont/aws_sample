@@ -69,32 +69,20 @@ pipeline {
         }
         stage('Read yam version file') {
             steps {
-                updateVersion( 'artifactVersions/version-code.yml', "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+                updateVersion('artifactVersions/version-code.yml', "${ARTIFACT_ID}", "${PROJECT_VERSION}")
             }
         }
         stage('Push Artifact Version to Repository') {
-            environment{
-              GIT_VERSION_URL =  authUrl 'http://bitbucket:7990/scm/tkd/deploy-local.git', "${GIT_CREDENTIAL_ID}"
+            environment {
+                GIT_VERSION_URL = authUrl 'http://bitbucket:7990/scm/tkd/deploy-local.git', "${GIT_CREDENTIAL_ID}"
             }
             steps {
                 dir('artifactVersions') {
                     sh('''
-git status
 git add "version-code.yml"
-git status
 git commit -m "frbo commit message"
-git status
 git push  "${GIT_VERSION_URL}"
-git status
 ''')
-
-//                    git "status"
-//                    git "add 'version-code.yml'"
-//                    git "status"
-//                    git "commit -m 'frbo commit'"
-//                    git "status"
-//                    git "push: authUrl ('http://bitbucket:7990/scm/tkd/deploy-local.git', ${GIT_CREDENTIAL_ID})"
-//                    git "status"
                 }
             }
         }
