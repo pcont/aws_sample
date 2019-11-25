@@ -83,7 +83,7 @@ pipeline {
                     sh('''
 git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
 git add "version-code.yml"
-git commit -m "frbo commit message"
+git commit -m "Updating version ${readMavenPom()}"
 git push "${GIT_VERSION_REPO}"
 ''')
                 }
