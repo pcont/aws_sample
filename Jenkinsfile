@@ -67,7 +67,7 @@ pipeline {
 
                 }
                 dir('artifactVersions') {
-                    data = feadYaml file: 'version-code.yml'
+                    data = readYaml file: 'version-code.yml'
                     echo data
                 }
         }
