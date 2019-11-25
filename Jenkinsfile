@@ -70,12 +70,16 @@ pipeline {
             }
         }
         stage('Read yam version file') {
-            environment {
-                YML_CONTENT = readYaml file: 'artifactVersions/version-code.yml'
-
-            }
+//            environment {
+//                YML_CONTENT = readYaml file: 'artifactVersions/version-code.yml'
+//            }
             steps {
-                echo "${YML_CONTENT}"
+                steps {
+                    script { YML_CONTENT = readYaml(file: 'artifactVersions/version-code.yml') }
+                    echo "${YML_CONTENT.package_versions}"
+
+                    "${YML_CONTENT}.package_versions.${ARTIFACT_ID} = ${PROJECT_VERSION}"
+                }
             }
         }
     }
