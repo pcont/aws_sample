@@ -37,7 +37,7 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             steps{
-                tagGit
+                tagGit()
             }
 //            environment {
 //                TAG_VALUE = "V_${PROJECT_VERSION}"
