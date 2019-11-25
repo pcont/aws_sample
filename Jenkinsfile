@@ -64,9 +64,7 @@ pipeline {
                     git branch: 'master',
                             credentialsId: "${GIT_CREDENTIAL_ID}",
                             url: 'http://bitbucket:7990/scm/tkd/deploy-local.git'
-
                 }
-
             }
         }
         stage('Read yam version file') {
@@ -77,13 +75,22 @@ pipeline {
         stage('Push Artifact Version to Repository') {
             steps {
                 dir('artifactVersions') {
-                    git "status"
-                    git "add 'version-code.yml'"
-                    git "status"
-                    git "commit -m 'frbo commit'"
-                    git "status"
-                    git "push: authUrl ('http://bitbucket:7990/scm/tkd/deploy-local.git', ${GIT_CREDENTIAL_ID})"
-                    git "status"
+                    sh('''
+git status
+git add "version-code.yml"
+git status
+git commit -m "frbo commit message"
+git status
+
+''')
+
+//                    git "status"
+//                    git "add 'version-code.yml'"
+//                    git "status"
+//                    git "commit -m 'frbo commit'"
+//                    git "status"
+//                    git "push: authUrl ('http://bitbucket:7990/scm/tkd/deploy-local.git', ${GIT_CREDENTIAL_ID})"
+//                    git "status"
                 }
             }
         }
