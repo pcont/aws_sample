@@ -69,7 +69,7 @@ pipeline {
 
                 }
                 dir('artifactVersions') {
-                    ymlContent = readYaml file: 'version-code.yml'
+                    ymlContent = sh( returnStdout: true, script: "readYaml file: 'version-code.yml'")
                     echo ymlContent
                 }
             }
