@@ -14,6 +14,8 @@ pipeline {
         PROJECT_VERSION = projectVersion()
         ARTIFACT_ID = "${readMavenPom().artifactId}"
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
+
+        VERSION_REPO_DIR = ''
     }
 
     stages {
@@ -77,13 +79,14 @@ pipeline {
             environment {
 //                GIT_VERSION_URL = authUrl 'http://bitbucket:7990/scm/tkd/deploy-local.git', "${GIT_CREDENTIAL_ID}"
                 GIT_AUTH = credentials( "${GIT_CREDENTIAL_ID}")
+                ARTIFACT_NAME = "${readMavenPom()}"
             }
             steps {
                 dir('artifactVersions') {
                     sh('''
 git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
 git add "version-code.yml"
-git commit -m "Updating version ${readMavenPom()}"
+git commit -m "Updating version ${ARTIFACT_NAME}"
 git push "${GIT_VERSION_REPO}"
 ''')
                 }
