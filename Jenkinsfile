@@ -74,10 +74,10 @@ pipeline {
             }
         }
         stage('Push Artifact Version to Repository') {
-//            environment {
+            environment {
 //                GIT_VERSION_URL = authUrl 'http://bitbucket:7990/scm/tkd/deploy-local.git', "${GIT_CREDENTIAL_ID}"
-//                GIT_AUTH = credentials( "${GIT_CREDENTIAL_ID}")
-//            }
+                GIT_AUTH = credentials( "${GIT_CREDENTIAL_ID}")
+            }
             steps {
                 dir('artifactVersions') {
                     sh('''
