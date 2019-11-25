@@ -79,7 +79,7 @@ pipeline {
                 dir('artifactVersions') {
                     git add 'version-code.yml'
                     git commit -m 'frbo commit'
-                    git push: authUrl ("'http://bitbucket:7990/scm/tkd/deploy-local.git'", "${GIT_CREDENTIAL_ID}")
+                    git "push: authUrl ('http://bitbucket:7990/scm/tkd/deploy-local.git', ${GIT_CREDENTIAL_ID})"
                 }
             }
         }
