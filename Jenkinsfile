@@ -14,8 +14,6 @@ pipeline {
         PROJECT_VERSION = projectVersion()
         ARTIFACT_ID = "${readMavenPom().artifactId}"
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
-
-        VERSION_REPO_DIR = ''
     }
 
     stages {
@@ -38,15 +36,18 @@ pipeline {
             when {
                 branch "${DEPLOY_BRANCH}"
             }
-            environment {
-                TAG_VALUE = "V_${PROJECT_VERSION}"
-                GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
+            steps{
+                tagGit
             }
-            steps {
-                sh("git checkout ${GIT_BRANCH}")
-                sh("git tag ${TAG_VALUE}")
-                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
-            }
+//            environment {
+//                TAG_VALUE = "V_${PROJECT_VERSION}"
+//                GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
+//            }
+//            steps {
+//                sh("git checkout ${GIT_BRANCH}")
+//                sh("git tag ${TAG_VALUE}")
+//                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
+//            }
         }
         stage('Deploy') {
             when {
@@ -77,7 +78,6 @@ pipeline {
         }
         stage('Push Artifact Version to Repository') {
             environment {
-//                GIT_VERSION_URL = authUrl 'http://bitbucket:7990/scm/tkd/deploy-local.git', "${GIT_CREDENTIAL_ID}"
                 GIT_AUTH = credentials( "${GIT_CREDENTIAL_ID}")
                 ARTIFACT_NAME = "${readMavenPom()}"
             }
