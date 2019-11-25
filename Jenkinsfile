@@ -84,7 +84,7 @@ git add "version-code.yml"
 git status
 git commit -m "frbo commit message"
 git status
-git push  ${GIT_VERSION_URL}
+git push  "${GIT_VERSION_URL}"
 git status
 ''')
 
