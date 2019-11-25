@@ -74,7 +74,7 @@ pipeline {
 //                YML_CONTENT = readYaml file: 'artifactVersions/version-code.yml'
 //            }
             steps {
-                updateVersion( 'artifactVersions')
+                updateVersion( 'artifactVersions', 'version-code.yml')
 //
 //                script { YML_CONTENT = readYaml(file: 'artifactVersions/version-code.yml') }
 //                echo "${YML_CONTENT.package_versions}"
