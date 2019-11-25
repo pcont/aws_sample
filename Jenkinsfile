@@ -33,9 +33,9 @@ pipeline {
             }
         }
         stage('Tag Version') {
-            when {
-                branch "${DEPLOY_BRANCH}"
-            }
+//            when {
+//                branch "${DEPLOY_BRANCH}"
+//            }
             steps{
                 tagGit()
             }
