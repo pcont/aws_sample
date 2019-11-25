@@ -64,6 +64,7 @@ pipeline {
                     git branch: 'master',
                             credentialsId: "${GIT_CREDENTIAL_ID}",
                             url: 'http://bitbucket:7990/scm/tkd/deploy-local.git'
+                    def data = feadYaml file: 'version-code.yml'
                 }
             }
         }
