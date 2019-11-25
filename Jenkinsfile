@@ -75,8 +75,7 @@ pipeline {
 
             }
             steps {
-                echo "${ymlContent}"
-
+                echo "${YML_CONTENT}"
             }
         }
     }
