@@ -74,7 +74,10 @@ pipeline {
                 YML_CONTENT = readYaml file: 'artifactVersions/version-code.yml'
 
             }
-            echo ymlContent
+            steps {
+                echo "${ymlContent}"
+
+            }
         }
     }
 }
