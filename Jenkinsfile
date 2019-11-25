@@ -78,7 +78,11 @@ pipeline {
                     script { YML_CONTENT = readYaml(file: 'artifactVersions/version-code.yml') }
                     echo "${YML_CONTENT.package_versions}"
 
-                    "${YML_CONTENT}.package_versions.${ARTIFACT_ID} = ${PROJECT_VERSION}"
+                    script { "${YML_CONTENT}.package_versions.${ARTIFACT_ID} = ${PROJECT_VERSION}" }
+
+                    sh("rm artifactVersions/version-code.yml")
+
+                    writeYaml file: 'artifactVersions/version-code.yml', data: "${YML_CONTENT}"
                 }
             }
         }
