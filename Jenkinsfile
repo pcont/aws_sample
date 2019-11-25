@@ -70,6 +70,7 @@ pipeline {
                     data = readYaml file: 'version-code.yml'
                     echo data
                 }
+            }
         }
     }
 }
