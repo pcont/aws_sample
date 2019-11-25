@@ -81,6 +81,7 @@ pipeline {
 
                 sh("rm artifactVersions/version-code.yml")
 
+                echo "${YML_CONTENT.package_versions}"
                 writeYaml file: 'artifactVersions/version-code.yml', data: "${YML_CONTENT}"
             }
         }
