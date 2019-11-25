@@ -57,5 +57,15 @@ pipeline {
                 }
             }
         }
+        state('Update Artifact Version') {
+            steps {
+                sh 'rm artifactVersions -rf; mkdir artifactVersions'
+                dir('artifactVersions') {
+                    git branch: 'master',
+                            credentialsId: "${GIT_CREDENTIAL_ID}",
+                            url: 'http://bitbucket:7990/scm/tkd/deploy-local.git'
+                }
+            }
+        }
     }
 }
