@@ -1,7 +1,5 @@
 @Library('pipeline-shared@master') _
 
-def ymlContent = 'undefined'
-
 pipeline {
     agent {
         docker {
@@ -68,11 +66,15 @@ pipeline {
                             url: 'http://bitbucket:7990/scm/tkd/deploy-local.git'
 
                 }
-                dir('artifactVersions') {
-                    ymlContent = sh( returnStdout: true, script: "readYaml file: 'version-code.yml'")
-                    echo ymlContent
-                }
+
             }
+        }
+        stage('Read yam version file') {
+            environment {
+                YML_CONTENT = readYaml file: 'artifactVersions/version-code.yml'
+
+            }
+            echo ymlContent
         }
     }
 }
