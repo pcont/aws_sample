@@ -13,6 +13,7 @@ pipeline {
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
         ARTIFACT_ID = "${readMavenPom().artifactId}"
+        GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
     }
 
     stages {
@@ -63,7 +64,7 @@ pipeline {
                 dir('artifactVersions') {
                     git branch: 'master',
                             credentialsId: "${GIT_CREDENTIAL_ID}",
-                            url: 'http://bitbucket:7990/scm/tkd/deploy-local.git'
+                            url: "${GIT_VERSION_REPO}"
                 }
             }
         }
@@ -80,12 +81,10 @@ pipeline {
             steps {
                 dir('artifactVersions') {
                     sh('''
-git config --list
 git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
 git add "version-code.yml"
 git commit -m "frbo commit message"
-git push  'http://bitbucket:7990/scm/tkd/deploy-local.git'
-git config --list
+git push "${GIT_VERSION_REPO}"
 ''')
                 }
             }
