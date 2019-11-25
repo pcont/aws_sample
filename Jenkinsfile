@@ -77,8 +77,8 @@ pipeline {
         stage('Push Artifact Version to Repository') {
             steps {
                 dir('artifactVersions') {
-                    git add 'version-code.yml'
-                    git commit -m 'frbo commit'
+                    git "add 'version-code.yml'"
+                    git "commit -m 'frbo commit'"
                     git "push: authUrl ('http://bitbucket:7990/scm/tkd/deploy-local.git', ${GIT_CREDENTIAL_ID})"
                 }
             }
