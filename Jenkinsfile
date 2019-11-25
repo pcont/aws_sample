@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        stage('Update Artifact Version') {
+        stage('Clone Artifact Version Repository') {
             steps {
                 sh 'rm artifactVersions -rf; mkdir artifactVersions'
                 dir('artifactVersions') {
@@ -72,6 +72,15 @@ pipeline {
         stage('Read yam version file') {
             steps {
                 updateVersion( 'artifactVersions/version-code.yml', "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+            }
+        }
+        stage('Push Artifact Version to Repository') {
+            steps {
+                dir('artifactVersions') {
+                    git add 'version-code.yml'
+                    git commit -m 'frbo commit'
+                    git push: authUrl ("'http://bitbucket:7990/scm/tkd/deploy-local.git'", "${GIT_CREDENTIAL_ID}")
+                }
             }
         }
     }
