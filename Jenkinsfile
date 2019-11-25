@@ -1,5 +1,7 @@
 @Library('pipeline-shared@master') _
 
+def ymlContent = 'undefined'
+
 pipeline {
     agent {
         docker {
@@ -67,8 +69,8 @@ pipeline {
 
                 }
                 dir('artifactVersions') {
-                    data = readYaml file: 'version-code.yml'
-                    echo data
+                    ymlContent = readYaml file: 'version-code.yml'
+                    echo ymlContent
                 }
             }
         }
