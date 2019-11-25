@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        state('Update Artifact Version') {
+        stage('Update Artifact Version') {
             steps {
                 sh 'rm artifactVersions -rf; mkdir artifactVersions'
                 dir('artifactVersions') {
