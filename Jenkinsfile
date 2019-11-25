@@ -12,7 +12,7 @@ pipeline {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
-        ARTIFACT_ID = "${readMavenPom}.artifactId"
+        ARTIFACT_ID = "${readMavenPom()}.artifactId"
     }
 
     stages {
