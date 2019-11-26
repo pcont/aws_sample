@@ -124,22 +124,21 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
-            <!--            <plugin>-->
-            <!--                <artifactId>maven-deploy-plugin</artifactId>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
-
-    <!--    <distributionManagement>-->
-    <!--        <repository>-->
-    <!--            <id>artifactoryId</id>-->
-    <!--            from dev -->
-    <!--            <url>http://127.0.0.1:8081/artifactory/libs-release-local/</url>-->
-    <!--            from local jenkins -->
-    <!--            <url>http://artifactory:8081/artifactory/libs-release-local/</url>-->
-    <!--        </repository>-->
-    <!--    </distributionManagement>-->
-
 </project>
