@@ -52,10 +52,6 @@ pipeline {
                 }
             }
         }
-
-    }
-
-    stages{
         stage('Clone Artifact Version Repository') {
             steps {
                 sh 'rm artifactVersions -rf; mkdir artifactVersions'
@@ -87,6 +83,5 @@ git push "${GIT_VERSION_REPO}"
                 }
             }
         }
-
     }
 }
