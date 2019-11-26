@@ -61,8 +61,8 @@ pipeline {
                               -Durl=http://172.17.0.1:8081/artifactory/libs-release-local/
                             """
 
-                    sh """mvn deploy:deploy-file -DgroupId=${POM.groupId}
-                              -DartifactId=${POM.artifactId}
+                    sh """mvn deploy:deploy-file -DgroupId=${GROUP_ID}
+                              -DartifactId=${ARTIFACT_ID}
                               -Dversion=${PROJECT_VERSION}
                               -Dpackaging=jar
                               -Dfile=target/simple-11.22.33.SNAPSHOT.jar
