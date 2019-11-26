@@ -12,6 +12,7 @@ pipeline {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
+        POM = "${readMavenPom()}"
         ARTIFACT_ID = "${readMavenPom().artifactId}"
 
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
@@ -50,7 +51,15 @@ pipeline {
 //            }
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn org.apache.maven.wagon:wagon-http:3.3.4:upload -Dincludes=*.jar '
+//                    sh 'mvn org.apache.maven.wagon:wagon-http:3.3.4:upload -Dincludes=*.jar '
+                    sh '''mvn deploy:deploy-file -DgroupId="${POM.groupId}"
+                              -DartifactId="${POM.artifactId}"
+                              -Dversion="${PROJECT_VERSION}"
+                              -Dpackaging=jar
+                              -Dfile=target/simple-11.22.33.SNAPSHOT.jar
+                              -DrepositoryId=artifactoryId
+                              -Durl=http://172.17.0.1:8081/artifactory/libs-release-local/
+                            '''
                 }
             }
         }
