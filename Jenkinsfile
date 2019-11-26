@@ -12,9 +12,11 @@ pipeline {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
-        POM_GROUP_ID = "${readMavenPom().groupId}"
+//        POM_GROUP_ID = "${readMavenPom().groupId}"
         ARTIFACT_ID = "${readMavenPom().artifactId}"
-        POM_PACKAGING = "${readMavenPom().packaging}"
+//        POM_PACKAGING = "${readMavenPom().packaging}"
+
+        ARTIFACTORY_URL = 'http://artifactory:8081/artifactory/libs-release-local/'
 
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
         DIR_VERSION_REPO = 'artifactVersions'
@@ -52,30 +54,7 @@ pipeline {
 //                branch "${DEPLOY_BRANCH}"
 //            }
             steps {
-
-                deploy()
-
-//                configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-//                    echo """mvn org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -DgroupId=${POM_GROUP_ID}  \
-//-DartifactId=${ARTIFACT_ID} \
-//-Dversion=${PROJECT_VERSION} \
-//-Dpackaging=${POM_PACKAGING} \
-//-Dfile=target/${ARTIFACT_ID}-${PROJECT_VERSION}.jar \
-//-DpomFile=pom.xml \
-//-DrepositoryId=artifactoryId \
-//-Durl=http://artifactory:8081/artifactory/libs-release-local/
-//"""
-//
-//                    sh """mvn org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -DgroupId=${POM_GROUP_ID}  \
-//-DartifactId=${ARTIFACT_ID} \
-//-Dversion=${PROJECT_VERSION} \
-//-Dpackaging=${POM_PACKAGING} \
-//-Dfile=target/${ARTIFACT_ID}-${PROJECT_VERSION}.jar \
-//-DpomFile=pom.xml \
-//-DrepositoryId=artifactoryId \
-//-Durl=http://admin:password@artifactory:8081/artifactory/libs-release-local/
-//"""
-//                }
+                deploy("${ARTIFACTORY_URL}")
             }
         }
         stage('Clone Artifact Version Repository') {
