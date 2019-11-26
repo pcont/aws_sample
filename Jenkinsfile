@@ -12,6 +12,12 @@ pipeline {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
+        ARTIFACT_ID = "${readMavenPom().artifactId}"
+
+        GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
+        DIR_VERSION_REPO = 'artifactVersions'
+        FILE_VERSION_REPO = 'version-code.yml'
+        BRANCH_VERSION_REPO = 'master'
     }
 
     stages {
@@ -34,14 +40,8 @@ pipeline {
             when {
                 branch "${DEPLOY_BRANCH}"
             }
-            environment {
-                TAG_VALUE = "V_${PROJECT_VERSION}"
-                GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
-            }
             steps {
-                sh("git checkout ${GIT_BRANCH}")
-                sh("git tag ${TAG_VALUE}")
-                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
+                tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
             }
         }
         stage('Deploy') {
@@ -54,6 +54,30 @@ pipeline {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
                     sh 'mvn deploy -s $MAVEN_SETTINGS_XML -Dmaven.install.skip'
                 }
+            }
+        }
+        stage('Clone Artifact Version Repository') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
+            steps {
+                cloneVersionRepo("${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}")
+            }
+        }
+        stage('Read yam version file') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
+            steps {
+                updateVersionRepo("${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+            }
+        }
+        stage('Push Artifact Version to Repository') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
+            steps {
+                pushVersionRepo("${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}")
             }
         }
     }
