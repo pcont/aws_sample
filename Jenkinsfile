@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn version:set versions:commit -DnewVersion="${PROJECT_VERSION}"'
+                sh 'mvn versions:set versions:commit -DnewVersion="${PROJECT_VERSION}"'
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
             }
             post {
