@@ -52,7 +52,9 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
 //                    sh 'mvn org.apache.maven.wagon:wagon-http:3.3.4:upload -Dincludes=*.jar '
-                    echo """mvn deploy:deploy-file -DgroupId=${POM.groupId}
+                    echo """
+${POM.artifactId}
+mvn deploy:deploy-file -DgroupId=${POM.groupId}
                               -DartifactId=${POM.artifactId}
                               -Dversion=${PROJECT_VERSION}
                               -Dpackaging=jar
