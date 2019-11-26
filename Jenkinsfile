@@ -73,14 +73,17 @@ pipeline {
                 ARTIFACT_NAME = "${readMavenPom()}"
             }
             steps {
-                dir('artifactVersions') {
-                    sh('''
-git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
-git add "version-code.yml"
-git commit -m "Updating version ${ARTIFACT_NAME}"
-git push "${GIT_VERSION_REPO}"
-''')
-                }
+                pushVersionRepo("${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+
+
+//                dir('artifactVersions') {
+//                    sh('''
+//git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
+//git add "version-code.yml"
+//git commit -m "Updating version ${ARTIFACT_NAME}"
+//git push "${GIT_VERSION_REPO}"
+//''')
+//                }
             }
         }
     }
