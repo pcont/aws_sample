@@ -54,24 +54,24 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
                     echo """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
-                              -DartifactId=${ARTIFACT_ID} \
-                              -Dversion=${PROJECT_VERSION} \
-                              -Dpackaging=jar \
-                              -Dfile=target/simple-${PROJECT_VERSION}.jar \
-                              -DpomFile=pom.xml
-                              -DrepositoryId=artifactoryId \
-                              -Durl=http://artifactory:8081/artifactory/libs-release-local/
-                            """
+-DartifactId=${ARTIFACT_ID} \
+-Dversion=${PROJECT_VERSION} \
+-Dpackaging=jar \
+-Dfile=target/simple-${PROJECT_VERSION}.jar \
+-DpomFile=pom.xml
+-DrepositoryId=artifactoryId \
+-Durl=http://artifactory:8081/artifactory/libs-release-local/
+"""
 
                     sh """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
-                              -DartifactId=${ARTIFACT_ID} \
-                              -Dversion=${PROJECT_VERSION} \
-                              -Dpackaging=jar \
-                              -Dfile=target/simple-${PROJECT_VERSION}.jar \
-                              -DpomFile=pom.xml
-                              -DrepositoryId=artifactoryId \
-                              -Durl=http://artifactory:8081/artifactory/libs-release-local/
-                            """
+-DartifactId=${ARTIFACT_ID} \
+-Dversion=${PROJECT_VERSION} \
+-Dpackaging=jar \
+-Dfile=target/simple-${PROJECT_VERSION}.jar \
+-DpomFile=pom.xml
+-DrepositoryId=artifactoryId \
+-Durl=http://artifactory:8081/artifactory/libs-release-local/
+"""
                 }
             }
         }
