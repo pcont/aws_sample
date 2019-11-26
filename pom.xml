@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.simple</groupId>
-    <artifactId>simple</artifactId>
+    <artifactId>art</artifactId>
     <version>11.22.33.42</version>
 
     <name>simple-jar</name>
