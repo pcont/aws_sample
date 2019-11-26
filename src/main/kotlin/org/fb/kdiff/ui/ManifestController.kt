@@ -10,7 +10,7 @@ import java.util.jar.Manifest
 
 
 @Component
-class KdiffController {
+class ManifestController {
 
     @FXML
     private lateinit var manifest: Label
@@ -22,14 +22,18 @@ class KdiffController {
         val other = "${jarName}!/META-INF/MANIFEST.MF"
 
         val candidates = candidates()
-        val filter = candidates.first { it.path.contains(other) }
+        val filter = candidates.firstOrNull() { it.path.contains(other) }
 
-        val urlConnection: URLConnection = filter.openConnection()
-        val iss: InputStream = urlConnection.getInputStream()
+        if (filter != null) {
+            val urlConnection: URLConnection = filter.openConnection()
+            val iss: InputStream = urlConnection.getInputStream()
 
-        manifest.text = Manifest(iss).mainAttributes
-                .map { (key, value) -> "${key}:\t$value" }
-                .joinToString(prefix = "Manifest\n", separator = "\n")
+            manifest.text = Manifest(iss).mainAttributes
+                    .map { (key, value) -> "${key}:\t$value" }
+                    .joinToString(prefix = "Manifest\n", separator = "\n")
+        } else {
+            manifest.text = "No Manifest found"
+        }
     }
 
     private fun candidates(): List<URL> {
@@ -39,7 +43,7 @@ class KdiffController {
         return urls2 - urls1
     }
 
-    private fun currentJar(): String {
+    fun currentJar(): String {
         val path = this::javaClass.javaClass.protectionDomain.codeSource.location.path
         val sub = path.substring(1, path.indexOf(".jar") + ".jar".length)
         return sub.substring(sub.lastIndexOf("/") + 1)
