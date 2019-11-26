@@ -71,7 +71,7 @@ pipeline {
 -Dfile=target/${ARTIFACT_ID}-${PROJECT_VERSION}.jar \
 -DpomFile=pom.xml \
 -DrepositoryId=artifactoryId \
--Durl=http://artifactory:8081/artifactory/libs-release-local/
+-Durl=http://admin:password@artifactory:8081/artifactory/libs-release-local/
 """
                 }
             }
