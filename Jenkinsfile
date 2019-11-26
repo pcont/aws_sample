@@ -16,6 +16,7 @@ pipeline {
 
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
         DIR_VERSION_REPO = 'artifactVersions'
+        FILE_VERSION_REPO = 'version-code.yml'
         BRANCH_VERSION_REPO = 'master'
     }
 
@@ -57,13 +58,13 @@ pipeline {
         }
         stage('Clone Artifact Version Repository') {
             steps {
-                cloneVersionRepository("${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}")
+                cloneVersionRepo("${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}")
 
             }
         }
         stage('Read yam version file') {
             steps {
-                updateVersion('artifactVersions/version-code.yml', "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+                updateVersionRepo("${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}")
             }
         }
         stage('Push Artifact Version to Repository') {
