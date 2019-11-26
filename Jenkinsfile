@@ -73,7 +73,7 @@ pipeline {
                 ARTIFACT_NAME = "${readMavenPom()}"
             }
             steps {
-                pushVersionRepo("${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+                pushVersionRepo("${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}")
 
 
 //                dir('artifactVersions') {
