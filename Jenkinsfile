@@ -37,7 +37,7 @@ pipeline {
 //                branch "${DEPLOY_BRANCH}"
 //            }
             steps {
-                tagGit("V_${PROJECT_VERSION}", "${GIT_BRANCH}")
+                tagGit "V_${PROJECT_VERSION}", "${GIT_BRANCH}"
             }
         }
         stage('Deploy') {
