@@ -53,7 +53,7 @@ pipeline {
 //            }
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    echo """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
+                    echo """mvn org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -DgroupId=${POM_GROUP_ID}  \
 -DartifactId=${ARTIFACT_ID} \
 -Dversion=${PROJECT_VERSION} \
 -Dpackaging=jar \
@@ -63,14 +63,14 @@ pipeline {
 -Durl=http://artifactory:8081/artifactory/libs-release-local/
 """
 
-                    sh """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
+                    sh """mvn org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -DgroupId=${POM_GROUP_ID}  \
 -DartifactId=${ARTIFACT_ID} \
 -Dversion=${PROJECT_VERSION} \
 -Dpackaging=jar \
 -Dfile=target/simple-${PROJECT_VERSION}.jar \
 -DpomFile=pom.xml \
 -DrepositoryId=artifactoryId \
--Durl=http://artifactory:8081/artifactory/libs-release-local/ -X -e
+-Durl=http://admin:password@artifactory:8081/artifactory/libs-release-local/
 """
                 }
             }
