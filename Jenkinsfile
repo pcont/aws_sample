@@ -34,7 +34,7 @@ pipeline {
                 sh "mvn versions:set versions:commit -DnewVersion=${PROJECT_VERSION}"
             }
         }
-        stage('Build') {
+        stage('Build & Test') {
             steps {
                 sh "mvn -B clean verify"
             }
