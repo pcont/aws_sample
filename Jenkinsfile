@@ -26,16 +26,16 @@ pipeline {
                 sh "printenv"
             }
         }
-//        stage('Build') {
-//            steps {
-//                sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
-//            }
-//            post {
-//                always {
-//                    junit 'target/surefire-reports/*.xml'
-//                }
-//            }
-//        }
+        stage('Build') {
+            steps {
+                sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
         stage('Tag Version') {
             when {
                 branch "${DEPLOY_BRANCH}"
@@ -48,11 +48,10 @@ pipeline {
 //            when {
 //                branch "${DEPLOY_BRANCH}"
 //            }
-//            todo deploy without rebuilding (if possible)
 //            beware of the jar name
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn deploy -s $MAVEN_SETTINGS_XML -X -e'
+                    sh 'mvn org.jfrog.buildinfo:artifactory-maven-plugin:2.6.1:publish '
                 }
             }
         }
