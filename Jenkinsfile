@@ -41,7 +41,7 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
-                tagGit "V_${PROJECT_VERSION}", "${GIT_BRANCH}"
+                tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
             }
         }
         stage('Deploy') {
@@ -68,10 +68,10 @@ pipeline {
             }
         }
         stage('Push Artifact Version to Repository') {
-            environment {
-                GIT_AUTH = credentials("${GIT_CREDENTIAL_ID}")
-                ARTIFACT_NAME = "${readMavenPom()}"
-            }
+//            environment {
+//                GIT_AUTH = credentials("${GIT_CREDENTIAL_ID}")
+//                ARTIFACT_NAME = "${readMavenPom()}"
+//            }
             steps {
                 pushVersionRepo("${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}")
 
