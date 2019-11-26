@@ -54,12 +54,13 @@ pipeline {
         }
         stage('Clone Artifact Version Repository') {
             steps {
-                sh 'rm artifactVersions -rf; mkdir artifactVersions'
-                dir('artifactVersions') {
-                    git branch: 'master',
-                            credentialsId: "${GIT_CREDENTIAL_ID}",
-                            url: "${GIT_VERSION_REPO}"
-                }
+                cloneVersionRepository()
+//                sh 'rm artifactVersions -rf; mkdir artifactVersions'
+//                dir('artifactVersions') {
+//                    git branch: 'master',
+//                            credentialsId: "${GIT_CREDENTIAL_ID}",
+//                            url: "${GIT_VERSION_REPO}"
+//                }
             }
         }
         stage('Read yam version file') {
