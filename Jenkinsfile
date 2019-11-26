@@ -30,6 +30,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh 'mvn version:set versions:commit -DnewVersion="${PROJECT_VERSION}"'
                 sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
             }
             post {
@@ -52,12 +53,11 @@ pipeline {
 //            }
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-//                    sh 'mvn org.apache.maven.wagon:wagon-http:3.3.4:upload -Dincludes=*.jar '
                     echo """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
                               -DartifactId=${ARTIFACT_ID} \
                               -Dversion=${PROJECT_VERSION} \
                               -Dpackaging=jar \
-                              -Dfile=target/simple-${POM_VERSION}.jar \
+                              -Dfile=target/simple-${PROJECT_VERSION}.jar \
                               -DrepositoryId=artifactoryId \
                               -Durl=http://artifactory:8081/artifactory/libs-release-local/
                             """
@@ -66,7 +66,7 @@ pipeline {
                               -DartifactId=${ARTIFACT_ID} \
                               -Dversion=${PROJECT_VERSION} \
                               -Dpackaging=jar \
-                              -Dfile=target/simple-${POM_VERSION}.jar \
+                              -Dfile=target/simple-${PROJECT_VERSION}.jar \
                               -DrepositoryId=artifactoryId \
                               -Durl=http://artifactory:8081/artifactory/libs-release-local/
                             """
