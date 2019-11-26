@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>org.simple</groupId>
-    <artifactId>simple</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <artifactId>art</artifactId>
+    <version>11.22.33.42</version>
 
     <name>simple-jar</name>
     <description>Showing and merging folders</description>
@@ -115,34 +115,30 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Build-Version>${build.number}</Build-Version>
+                            <Build-Version>${project.version}</Build-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <artifactId>maven-release-plugin</artifactId>-->
-            <!--                <version>2.5.3</version>-->
-            <!--                <configuration>-->
-            <!--                    <tagBase>https://github.com/frbo42/kdiff/tags</tagBase>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
             <plugin>
-                <groupId>external.atlassian.jgitflow</groupId>
-                <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>1.0-m5.1</version>
-                <configuration>
-                    <!-- see goals wiki page for configuration options -->
-                </configuration>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
             </plugin>
+
+            <!--            <plugin>-->
+            <!--                <artifactId>maven-deploy-plugin</artifactId>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 
     <!--    <distributionManagement>-->
     <!--        <repository>-->
-    <!--            <id>mypkfit-artifactory</id>-->
-    <!--            <name>My Pkfit Artifactory</name>-->
-    <!--            <url>https://package-repo.mypkfit.com/artifactory/libs-staging-local</url>-->
+    <!--            <id>artifactoryId</id>-->
+    <!--            from dev -->
+    <!--            <url>http://127.0.0.1:8081/artifactory/libs-release-local/</url>-->
+    <!--            from local jenkins -->
+    <!--            <url>http://artifactory:8081/artifactory/libs-release-local/</url>-->
     <!--        </repository>-->
     <!--    </distributionManagement>-->
 
