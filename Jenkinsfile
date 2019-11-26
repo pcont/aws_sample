@@ -57,33 +57,27 @@ pipeline {
             }
         }
         stage('Clone Artifact Version Repository') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             steps {
                 cloneVersionRepo("${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}")
-
             }
         }
         stage('Read yam version file') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             steps {
                 updateVersionRepo("${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}")
             }
         }
         stage('Push Artifact Version to Repository') {
-//            environment {
-//                GIT_AUTH = credentials("${GIT_CREDENTIAL_ID}")
-//                ARTIFACT_NAME = "${readMavenPom()}"
-//            }
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             steps {
                 pushVersionRepo("${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}")
-
-
-//                dir('artifactVersions') {
-//                    sh('''
-//git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
-//git add "version-code.yml"
-//git commit -m "Updating version ${ARTIFACT_NAME}"
-//git push "${GIT_VERSION_REPO}"
-//''')
-//                }
             }
         }
     }
