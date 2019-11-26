@@ -132,7 +132,7 @@
 <!--            from dev -->
 <!--            <url>http://127.0.0.1:8081/artifactory/libs-release-local/</url>-->
 <!--            from local jenkins -->
-            <url>http://172.17.0.1:8081/artifactory/libs-release-local/</url>
+            <url>http://artifactory:8081/artifactory/libs-release-local/</url>
         </repository>
     </distributionManagement>
 
