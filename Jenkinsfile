@@ -53,7 +53,7 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
 //                    sh 'mvn org.apache.maven.wagon:wagon-http:3.3.4:upload -Dincludes=*.jar '
-                    echo """mvn deploy:deploy-file -DgroupId=${GROUP_ID}  \
+                    echo """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
                               -DartifactId=${ARTIFACT_ID} \
                               -Dversion=${PROJECT_VERSION} \
                               -Dpackaging=jar \
@@ -62,7 +62,7 @@ pipeline {
                               -Durl=http://172.17.0.1:8081/artifactory/libs-release-local/
                             """
 
-                    sh """mvn deploy:deploy-file -DgroupId=${GROUP_ID}  \
+                    sh """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
                               -DartifactId=${ARTIFACT_ID} \
                               -Dversion=${PROJECT_VERSION} \
                               -Dpackaging=jar \
