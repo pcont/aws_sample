@@ -13,7 +13,10 @@ pipeline {
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
         ARTIFACT_ID = "${readMavenPom().artifactId}"
+
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
+        DIR_VERSION_REPO = 'artifactVersions'
+        BRANCH_VERSION_REPO = 'master'
     }
 
     stages {
@@ -54,13 +57,8 @@ pipeline {
         }
         stage('Clone Artifact Version Repository') {
             steps {
-                cloneVersionRepository()
-//                sh 'rm artifactVersions -rf; mkdir artifactVersions'
-//                dir('artifactVersions') {
-//                    git branch: 'master',
-//                            credentialsId: "${GIT_CREDENTIAL_ID}",
-//                            url: "${GIT_VERSION_REPO}"
-//                }
+                cloneVersionRepository("${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}")
+
             }
         }
         stage('Read yam version file') {
