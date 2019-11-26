@@ -60,7 +60,6 @@ pipeline {
                               -Dfile=target/simple-${PROJECT_VERSION}.jar \
                               -DrepositoryId=artifactoryId \
                               -Durl=http://artifactory:8081/artifactory/libs-release-local/
-                              http://127.0.0.1:8081/artifactory/libs-release-local/
                             """
 
                     sh """mvn deploy:deploy-file -DgroupId=${POM_GROUP_ID}  \
