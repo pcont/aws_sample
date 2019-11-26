@@ -36,18 +36,9 @@ pipeline {
 //            when {
 //                branch "${DEPLOY_BRANCH}"
 //            }
-            steps{
-                tagGit()
+            steps {
+                tagGit("V_${PROJECT_VERSION}", "${GIT_BRANCH}")
             }
-//            environment {
-//                TAG_VALUE = "V_${PROJECT_VERSION}"
-//                GIT_URL_WITH_AUTH = authUrl "${GIT_URL}", "${GIT_CREDENTIAL_ID}"
-//            }
-//            steps {
-//                sh("git checkout ${GIT_BRANCH}")
-//                sh("git tag ${TAG_VALUE}")
-//                sh("git push ${GIT_URL_WITH_AUTH} ${TAG_VALUE}")
-//            }
         }
         stage('Deploy') {
             when {
@@ -78,7 +69,7 @@ pipeline {
         }
         stage('Push Artifact Version to Repository') {
             environment {
-                GIT_AUTH = credentials( "${GIT_CREDENTIAL_ID}")
+                GIT_AUTH = credentials("${GIT_CREDENTIAL_ID}")
                 ARTIFACT_NAME = "${readMavenPom()}"
             }
             steps {
