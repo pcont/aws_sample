@@ -11,25 +11,26 @@ pipeline {
     environment {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
-        PROJECT_VERSION = projectVersion()
-        ARTIFACT_ID = "${readMavenPom().artifactId}"
-
         ARTIFACTORY_URL = 'http://artifactory:8081/artifactory/libs-release-local/'
-
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
-        DIR_VERSION_REPO = 'artifactVersions'
         FILE_VERSION_REPO = 'version-code.yml'
         BRANCH_VERSION_REPO = 'master'
+
+
+
+        PROJECT_VERSION = projectVersion()
+        ARTIFACT_ID = "${readMavenPom().artifactId}"
+        DIR_VERSION_REPO = 'artifactVersions'
     }
 
     stages {
-        stage('Current environment variables') {
+        stage('Environment Variables') {
             steps {
                 sh "printenv"
             }
         }
-        stage('Set Pom Version'){
-            steps{
+        stage('Set Pom Version') {
+            steps {
                 sh "mvn versions:set versions:commit -DnewVersion=${PROJECT_VERSION}"
             }
         }
@@ -39,7 +40,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    junit "target/surefire-reports/*.xml"
                 }
             }
         }
@@ -64,15 +65,15 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
-                cloneVersionRepo("${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}")
+                cloneVersionRepo "${DIR_VERSION_REPO}", "${GIT_VERSION_REPO}", "${BRANCH_VERSION_REPO}"
             }
         }
-        stage('Read yam version file') {
+        stage('Read Yaml Version File') {
             when {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
-                updateVersionRepo("${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}")
+                updateVersionRepo "${DIR_VERSION_REPO}/${FILE_VERSION_REPO}", "${ARTIFACT_ID}", "${PROJECT_VERSION}"
             }
         }
         stage('Push Artifact Version to Repository') {
@@ -80,7 +81,7 @@ pipeline {
                 branch "${DEPLOY_BRANCH}"
             }
             steps {
-                pushVersionRepo("${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}")
+                pushVersionRepo "${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}"
             }
         }
     }
