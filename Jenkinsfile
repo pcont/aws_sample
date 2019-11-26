@@ -50,7 +50,7 @@ pipeline {
 //            }
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn org.apache.maven.wagon:agon-webdav:3.3.4:upload -Dincludes=*.jar '
+                    sh 'mvn org.apache.maven.wagon:agon-http:3.3.4:upload -Dincludes=*.jar '
                 }
             }
         }
