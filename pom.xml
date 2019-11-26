@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.simple</groupId>
-    <artifactId>simple</artifactId>
+    <artifactId>art</artifactId>
     <version>11.22.33.42</version>
 
     <name>simple-jar</name>
@@ -115,7 +115,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Build-Version>${build.number}</Build-Version>
+                            <Build-Version>${project.version}</Build-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -132,7 +132,7 @@
 <!--            from dev -->
 <!--            <url>http://127.0.0.1:8081/artifactory/libs-release-local/</url>-->
 <!--            from local jenkins -->
-            <url>http://172.17.0.1:8081/artifactory/libs-release-local/</url>
+            <url>http://artifactory:8081/artifactory/libs-release-local/</url>
         </repository>
     </distributionManagement>
 

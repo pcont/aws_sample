@@ -14,6 +14,8 @@ pipeline {
         PROJECT_VERSION = projectVersion()
         ARTIFACT_ID = "${readMavenPom().artifactId}"
 
+        ARTIFACTORY_URL = 'http://artifactory:8081/artifactory/libs-release-local/'
+
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
         DIR_VERSION_REPO = 'artifactVersions'
         FILE_VERSION_REPO = 'version-code.yml'
@@ -26,9 +28,14 @@ pipeline {
                 sh "printenv"
             }
         }
+        stage('Set Pom Version'){
+            steps{
+                sh "mvn versions:set versions:commit -DnewVersion=${PROJECT_VERSION}"
+            }
+        }
         stage('Build') {
             steps {
-                sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
+                sh "mvn -B clean verify"
             }
             post {
                 always {
@@ -48,12 +55,8 @@ pipeline {
             when {
                 branch "${DEPLOY_BRANCH}"
             }
-//            todo deploy without rebuilding (if possible)
-//            beware of the jar name
             steps {
-                configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn deploy -s $MAVEN_SETTINGS_XML -Dmaven.install.skip'
-                }
+                deploy("${ARTIFACTORY_URL}")
             }
         }
         stage('Clone Artifact Version Repository') {
