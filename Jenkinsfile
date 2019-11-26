@@ -12,9 +12,7 @@ pipeline {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
-//        POM_GROUP_ID = "${readMavenPom().groupId}"
         ARTIFACT_ID = "${readMavenPom().artifactId}"
-//        POM_PACKAGING = "${readMavenPom().packaging}"
 
         ARTIFACTORY_URL = 'http://artifactory:8081/artifactory/libs-release-local/'
 
@@ -30,10 +28,14 @@ pipeline {
                 sh "printenv"
             }
         }
+        stage('Set Pom Version'){
+            steps{
+                sh "mvn versions:set versions:commit -DnewVersion=${PROJECT_VERSION}"
+            }
+        }
         stage('Build') {
             steps {
-                sh 'mvn versions:set versions:commit -DnewVersion="${PROJECT_VERSION}"'
-                sh 'mvn -B clean package -Dbuild.number=${BUILD_NUMBER}'
+                sh "mvn -B clean verify"
             }
             post {
                 always {
@@ -50,9 +52,9 @@ pipeline {
             }
         }
         stage('Deploy') {
-//            when {
-//                branch "${DEPLOY_BRANCH}"
-//            }
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
             steps {
                 deploy("${ARTIFACTORY_URL}")
             }
