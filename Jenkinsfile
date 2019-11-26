@@ -12,7 +12,7 @@ pipeline {
         DEPLOY_BRANCH = 'develop'
         GIT_CREDENTIAL_ID = 'admin'
         PROJECT_VERSION = projectVersion()
-        POM = "${readMavenPom()}"
+        GROUP_ID = "${readMavenPom().groupId}"
         ARTIFACT_ID = "${readMavenPom().artifactId}"
 
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
@@ -52,10 +52,8 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
 //                    sh 'mvn org.apache.maven.wagon:wagon-http:3.3.4:upload -Dincludes=*.jar '
-                    echo """
-${POM.artifactId}
-mvn deploy:deploy-file -DgroupId=${POM.groupId}
-                              -DartifactId=${POM.artifactId}
+                    echo """mvn deploy:deploy-file -DgroupId=${GROUP_ID}
+                              -DartifactId=${ARTIFACT_ID}
                               -Dversion=${PROJECT_VERSION}
                               -Dpackaging=jar
                               -Dfile=target/simple-11.22.33.SNAPSHOT.jar
