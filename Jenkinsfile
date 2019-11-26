@@ -48,10 +48,9 @@ pipeline {
 //            when {
 //                branch "${DEPLOY_BRANCH}"
 //            }
-//            beware of the jar name
             steps {
                 configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-                    sh 'mvn org.jfrog.buildinfo:artifactory-maven-plugin:2.6.1:publish '
+                    sh 'mvn org.apache.maven.wagon:agon-webdav:3.0.0:upload -Dincludes=*.jar '
                 }
             }
         }
