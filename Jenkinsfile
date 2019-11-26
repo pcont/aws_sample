@@ -70,7 +70,7 @@ pipeline {
 -Dfile=target/simple-${PROJECT_VERSION}.jar \
 -DpomFile=pom.xml \
 -DrepositoryId=artifactoryId \
--Durl=http://artifactory:8081/artifactory/libs-release-local/
+-Durl=http://artifactory:8081/artifactory/libs-release-local/ -X -e
 """
                 }
             }
