@@ -58,6 +58,7 @@ pipeline {
                               -Dversion=${PROJECT_VERSION} \
                               -Dpackaging=jar \
                               -Dfile=target/simple-${PROJECT_VERSION}.jar \
+                              -DpomFile=pom.xml
                               -DrepositoryId=artifactoryId \
                               -Durl=http://artifactory:8081/artifactory/libs-release-local/
                             """
@@ -67,6 +68,7 @@ pipeline {
                               -Dversion=${PROJECT_VERSION} \
                               -Dpackaging=jar \
                               -Dfile=target/simple-${PROJECT_VERSION}.jar \
+                              -DpomFile=pom.xml
                               -DrepositoryId=artifactoryId \
                               -Durl=http://artifactory:8081/artifactory/libs-release-local/
                             """
