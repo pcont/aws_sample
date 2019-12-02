@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.6.0'
-            args '-v /root/.m2:/root/.m2 --network=data_default'
+            args '-v /root/.m2:/root/.m2 --network=tkd_tkdnetwork'
         }
     }
 
