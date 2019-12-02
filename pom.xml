@@ -19,7 +19,7 @@
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <sonar.jacoco.reportPath>${project.basedir}/target/site/jacoco</sonar.jacoco.reportPath>
+        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
     </properties>
 
     <dependencies>

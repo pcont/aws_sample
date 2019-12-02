@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Build & Test') {
             steps {
-                sh "mvn -B clean verify -Prun-its,coverage"
+                sh "mvn -B clean verify"
             }
             post {
                 always {
