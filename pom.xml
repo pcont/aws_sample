@@ -14,26 +14,20 @@
     <version>11.22.33.42</version>
 
     <name>simple-example</name>
-    <description>Showing and merging folders</description>
+    <description>simple deploy example</description>
 
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-<!--        <start-class>org.fb.kdiff.Main</start-class>-->
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>${javafx-version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.openjfx</groupId>-->
-        <!--            <artifactId>javafx-graphics</artifactId>-->
-        <!--            <version>${javafx-version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -76,38 +70,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-            <!--                <executions>-->
-            <!--                    &lt;!&ndash; Replacing default-compile as it is treated specially by maven &ndash;&gt;-->
-            <!--                    <execution>-->
-            <!--                        <id>default-compile</id>-->
-            <!--                        <phase>none</phase>-->
-            <!--                    </execution>-->
-            <!--                    &lt;!&ndash; Replacing default-testCompile as it is treated specially by maven &ndash;&gt;-->
-            <!--                    <execution>-->
-            <!--                        <id>default-testCompile</id>-->
-            <!--                        <phase>none</phase>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>java-compile</id>-->
-            <!--                        <phase>compile</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>compile</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>java-test-compile</id>-->
-            <!--                        <phase>test-compile</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>testCompile</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-
-
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
