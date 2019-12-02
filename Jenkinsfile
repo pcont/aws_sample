@@ -94,10 +94,10 @@ pipeline {
                 pushVersionRepo "${DIR_VERSION_REPO}", "${FILE_VERSION_REPO}", "${GIT_VERSION_REPO}"
             }
         }
+    }
         post {
             always {
                 junit "target/surefire-reports/*.xml"
             }
         }
-    }
 }
