@@ -58,9 +58,9 @@ pipeline {
             when {
                 branch "${DEPLOY_BRANCH}"
             }
-            steps {
-                tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
-            }
+            //steps {
+            //    tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
+            //}
         }
         stage('Deploy') {
             when {
