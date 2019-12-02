@@ -13,7 +13,7 @@
     <artifactId>art</artifactId>
     <version>11.22.33.42</version>
 
-    <name>simple-jar</name>
+    <name>simple-example</name>
     <description>Showing and merging folders</description>
 
     <properties>
