@@ -19,7 +19,7 @@
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <start-class>org.fb.kdiff.Main</start-class>
+<!--        <start-class>org.fb.kdiff.Main</start-class>-->
     </properties>
 
     <dependencies>
@@ -29,11 +29,11 @@
             <artifactId>javafx-base</artifactId>
             <version>${javafx-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafx-version}</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.openjfx</groupId>-->
+        <!--            <artifactId>javafx-graphics</artifactId>-->
+        <!--            <version>${javafx-version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
