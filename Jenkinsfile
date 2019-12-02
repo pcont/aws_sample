@@ -54,14 +54,14 @@ pipeline {
                 }
             }
         }
-        //stage('Tag Version') {
-            //when {
-            //    branch "${DEPLOY_BRANCH}"
-            //}
-            //steps {
-            //    tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
-            //}
-        //}
+        stage('Tag Version') {
+            when {
+                branch "${DEPLOY_BRANCH}"
+            }
+            steps {
+                tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
+            }
+        }
         stage('Deploy') {
             when {
                 branch "${DEPLOY_BRANCH}"
