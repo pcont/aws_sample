@@ -19,7 +19,6 @@
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <sonar.language>java</sonar.language>
     </properties>
 
     <dependencies>
