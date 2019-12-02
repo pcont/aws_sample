@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        DEPLOY_BRANCH = 'develop'
+        DEPLOY_BRANCH = 'feature/allinone'
         GIT_CREDENTIAL_ID = 'admin'
         ARTIFACTORY_URL = 'http://artifactory:8081/artifactory/libs-release-local/'
         GIT_VERSION_REPO = 'http://bitbucket:7990/scm/tkd/deploy-local.git'
