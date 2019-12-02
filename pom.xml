@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.simple</groupId>
-    <artifactId>art</artifactId>
+    <artifactId>deploy-example</artifactId>
     <version>11.22.33.42</version>
 
     <name>simple-example</name>
@@ -19,6 +19,8 @@
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
