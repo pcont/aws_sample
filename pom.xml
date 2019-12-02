@@ -19,7 +19,8 @@
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <sonar.jacoco.reportPath>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.jacoco.reportPath>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     </properties>
