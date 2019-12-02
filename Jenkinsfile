@@ -56,7 +56,7 @@ pipeline {
         }
         stage('Tag Version') {
             when {
-                branch "${DEPLOY_BRANCH}"
+                branch "develop"
             }
             steps {
                 tagGit "${PROJECT_VERSION}", "${GIT_BRANCH}"
