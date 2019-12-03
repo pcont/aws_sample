@@ -13,7 +13,7 @@
     <artifactId>deploy-example</artifactId>
     <version>11.22.33.42</version>
 
-    <name>simple-example</name>
+    <name>simple-deploy-example</name>
     <description>simple deploy example</description>
 
     <properties>
