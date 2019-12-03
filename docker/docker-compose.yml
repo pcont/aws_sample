@@ -3,10 +3,12 @@ services:
   artifactory:
     image: docker.bintray.io/jfrog/artifactory-oss:6.15.0
     container_name: artifactory
+    networks:
+     - tkdnetwork
     ports:
      - 8081:8081
     volumes:
-     - ./artifactory:/var/opt/jfrog/artifactory
+     - artifactory:/var/opt/jfrog/artifactory
     restart: always
     ulimits:
       nproc: 65535
@@ -17,31 +19,62 @@ services:
   bitbucket:
      image: atlassian/bitbucket-server
      container_name: bitbucket
-     ports: 
+     networks:
+     - tkdnetwork
+     ports:
       - 7990:7990
       - 7999:7999
      volumes:
-      - ./bitbucket:/var/atlassian/application-data/bitbucket
+      - bitbucket:/var/atlassian/application-data/bitbucket
 
   jenkins:
      image: jenkinsci/blueocean
      container_name: jenkins
+     privileged: true
+     user: root
+     networks:
+     - tkdnetwork
      ports:
       - 8080:8080
       - 50000:50000
      volumes:
-      - ./jenkins:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock 
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
      privileged: true
 
   sonar:
      image: sonarqube
      container_name: sonar
+     networks:
+     - tkdnetwork
      ports:
       - 9000:9000
      volumes:
-      - ./sonar/conf:/opt/sonarqube/conf
-      - ./sonar/logs:/opt/sonarqube/logs
-      - ./sonar/extensions:/opt/sonarqube/extensions
-      - ./sonar/data:/opt/sonarqube/data
+      - sonarconf:/opt/sonarqube/conf
+      - sonarlogs:/opt/sonarqube/logs
+      - sonarextensions:/opt/sonarqube/extensions
+      - sonardata:/opt/sonarqube/data
      privileged: true
+
+  #jira:
+     #image: atlassian/jira-software
+     #container_name: jira
+     #networks:
+     #- tkdnetwork
+     #ports:
+      #- 8082:8080
+     #volumes:
+      #- jira:/var/atlassian/application-data/jira
+
+networks:
+    tkdnetwork:
+
+volumes:
+    sonarconf:
+    sonarlogs:
+    sonarextensions:
+    sonardata:
+    bitbucket:
+    artifactory:
+    jenkins_home:
+    jira:
