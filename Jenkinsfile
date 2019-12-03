@@ -45,6 +45,11 @@ pipeline {
             }
         }
         stage('Sonarqube'){
+            when{
+                anyOf{
+                    branch "${DEPLOY_BRANCH}";  branch "*sonar*"
+                }
+            }
             environment{
                 scannerHome = tool 'SonarQubeScanner'
             }
