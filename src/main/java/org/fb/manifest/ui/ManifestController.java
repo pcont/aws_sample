@@ -1,8 +1,8 @@
-package org.fb.kdiff.ui;
+package org.fb.manifest.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import org.fb.kdiff.api.manifest.ManifestService;
+import org.fb.manifest.api.manifest.ManifestService;
 import org.springframework.stereotype.Controller;
 
 @Controller

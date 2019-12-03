@@ -1,4 +1,4 @@
-package org.fb.kdiff;
+package org.fb.manifest;
 
 import javafx.application.Application;
 import javafx.application.Platform;
