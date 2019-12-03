@@ -47,7 +47,7 @@ pipeline {
         stage('Sonarqube'){
             when{
                 anyOf{
-                    branch "${DEPLOY_BRANCH}";  branch "*sonar*"
+                    branch "${DEPLOY_BRANCH}";  branch '*sonar*'
                 }
             }
             environment{
