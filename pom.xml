@@ -20,6 +20,7 @@
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.verbose>true</sonar.verbose>
     </properties>
 
     <dependencies>
