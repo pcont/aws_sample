@@ -1,2 +1,2 @@
 @Library('pipeline-shared@master') _
-defaultJarPipeline()
+defaultJarPipeline('versionRepo':'tkd/deploy-local.git')
