@@ -48,7 +48,7 @@ pipeline {
             when{
                 anyOf{
                     branch "${DEPLOY_BRANCH}"
-                    branch pattern: "*sonar*"
+                    branch pattern: "*sonar*", comparator: "REGEXP"
                 }
             }
             environment{
