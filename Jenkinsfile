@@ -51,14 +51,15 @@ pipeline {
                     branch "**/*sonar*/**"
                 }
             }
-            environment{
-                scannerHome = tool 'SonarQubeScanner'
-            }
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh "mvn sonar:sonar"
-                }
-            }
+            sonar()
+//            environment{
+//                scannerHome = tool 'SonarQubeScanner'
+//            }
+//            steps {
+//                withSonarQubeEnv('sonarqube') {
+//                    sh "mvn sonar:sonar"
+//                }
+//            }
         }
         stage('Tag Version') {
             when {
