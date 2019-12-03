@@ -2,7 +2,7 @@ package org.fb.manifest.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import org.fb.manifest.api.manifest.ManifestService;
+import org.fb.manifest.api.ManifestService;
 import org.springframework.stereotype.Controller;
 
 @Controller

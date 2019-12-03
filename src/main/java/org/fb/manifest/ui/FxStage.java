@@ -23,7 +23,7 @@ class FxStage implements ApplicationListener<StageReadyEvent> {
         try {
 
             stage = event.getStage();
-            FXMLLoader fxmlLoader = new FXMLLoader(new ClassPathResource("kdiff.fxml").getURL());
+            FXMLLoader fxmlLoader = new FXMLLoader(new ClassPathResource("manifest.fxml").getURL());
             fxmlLoader.setControllerFactory(param -> context.getBean(param));
 
             Parent parent = (Parent) fxmlLoader.load();

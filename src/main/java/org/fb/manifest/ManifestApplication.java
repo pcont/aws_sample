@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class KdiffApplication extends Application {
+public class ManifestApplication extends Application {
 
     private ConfigurableApplicationContext context;
 

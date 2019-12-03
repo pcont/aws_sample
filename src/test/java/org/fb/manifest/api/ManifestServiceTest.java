@@ -1,4 +1,4 @@
-package org.fb.manifest.api.manifest;
+package org.fb.manifest.api;
 
 import org.junit.jupiter.api.Test;
 
