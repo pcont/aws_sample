@@ -82,11 +82,26 @@ Add settings.xml as a config file
 image::jenkins/config-file.png[Config Files]
 +
 Add a `Maven settings.xml` file type.
-Give an Id (e.g. global-settings-xml).
+Give an Id `global-settings-xml`.
+The settings file is used for deploying to artifactory.
 You will need it later on.
-
-. Use the settings.xml file in Jenkins file
 +
-    configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-        sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
-    }
+The settings.xml file must look like
+
+    <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+        <servers>
+            <server>
+                <id>artifactoryId</id>
+                <username>admin</username>
+                <password>password</password>
+            </server>
+        </servers>
+    </settings>
++
+The artifactoryId `artifactoryId` is used in the deploy script.
+
+. Add environment variables
++
+image::jenkins/env-variables.png[Jenkins environmnet variables]
