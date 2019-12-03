@@ -1,4 +1,4 @@
-package org.fb.kdiff.api.manifest;
+package org.fb.manifest.api;
 
 import org.junit.jupiter.api.Test;
 

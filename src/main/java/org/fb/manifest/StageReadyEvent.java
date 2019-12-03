@@ -1,4 +1,4 @@
-package org.fb.kdiff;
+package org.fb.manifest;
 
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationEvent;

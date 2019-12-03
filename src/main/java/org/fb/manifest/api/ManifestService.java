@@ -1,4 +1,4 @@
-package org.fb.kdiff.api.manifest;
+package org.fb.manifest.api;
 
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class ManifestService {
     public String manifest() {
         try {
             String jarName = currentJar();
-            String other = "${jarName}!/META-INF/MANIFEST.MF";
+            String other = jarName + "!/META-INF/MANIFEST.MF";
 
             Set<URL> candidates = candidates();
             URL filter = candidates.stream()

@@ -1,10 +1,10 @@
-package org.fb.kdiff.ui;
+package org.fb.manifest.ui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.fb.kdiff.StageReadyEvent;
+import org.fb.manifest.StageReadyEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.ClassPathResource;
@@ -23,7 +23,7 @@ class FxStage implements ApplicationListener<StageReadyEvent> {
         try {
 
             stage = event.getStage();
-            FXMLLoader fxmlLoader = new FXMLLoader(new ClassPathResource("kdiff.fxml").getURL());
+            FXMLLoader fxmlLoader = new FXMLLoader(new ClassPathResource("manifest.fxml").getURL());
             fxmlLoader.setControllerFactory(param -> context.getBean(param));
 
             Parent parent = (Parent) fxmlLoader.load();
