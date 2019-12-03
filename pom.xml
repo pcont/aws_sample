@@ -19,8 +19,6 @@
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
@@ -103,6 +101,11 @@
                 <configuration>
                     <destFile>${sonar.jacoco.reportPath}</destFile>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.6.0.1398</version>
             </plugin>
         </plugins>
     </build>
