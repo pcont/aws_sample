@@ -1,2 +1,3 @@
 @Library('pipeline-shared@master') _
-defaultJarPipeline("deployBranch": "develop")
+defaultJarPipeline()
+//defaultJarPipeline("deployBranch": "develop")
