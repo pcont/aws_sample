@@ -9,7 +9,7 @@ class ManifestServiceTest {
     private ManifestService service = new ManifestService();
 
     @Test
-    void manifest() {
+    void unitTestShouldRun() {
         assertNotNull(service.manifest());
     }
 }
