@@ -50,7 +50,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh "mvn sonar:sonar"
+                    sh "mvn -X sonar:sonar"
                 }
             }
         }
