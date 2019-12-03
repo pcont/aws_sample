@@ -69,7 +69,13 @@ Git plugin
 
 image::jenkins/git-user-name.png[Adding Git User Name]
 
+Connecting to git (Bitbucket) also requires credentials to log into the server
+
+image::jenkins/git-credentials.png[Git credentials]
+The id `GIT_CREDENTIAL_ID` must be used.
+
 == Configure the Pipeline
+
 . Create multi branch pipeline
 . Configure branch sources
 +
@@ -105,3 +111,5 @@ The artifactoryId `artifactoryId` is used in the deploy script.
 . Add environment variables
 +
 image::jenkins/env-variables.png[Jenkins environmnet variables]
++
+The two environment variables must appear for the pipeline to work.
