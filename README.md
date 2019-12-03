@@ -14,3 +14,8 @@ Password: password
 [http://127.0.1:7990](http://127.0.1:7990)
 User: admin
 Password: password
+
+## SonarQube
+[http://127.0.1:9000](http://127.0.1:9000)
+User: admin
+Password: admin
