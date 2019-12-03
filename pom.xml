@@ -61,10 +61,6 @@
         </dependency>
     </dependencies>
 
-    <scm>
-        <developerConnection>scm:git:http://127.0.0.1:7990/scm/tkd/simple.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
     <build>
         <plugins>
             <plugin>
