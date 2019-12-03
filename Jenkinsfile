@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Set Pom Version') {
             steps {
-                sh "mvn versions:set versions:commit -DnewVersion=${PROJECT_VERSION}"
+                setPomVersion "${PROJECT_VERSION}"
             }
         }
         stage('Build & Test') {
