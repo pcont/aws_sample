@@ -14,12 +14,11 @@
     <version>11.22.33.42</version>
 
     <name>simple-deploy-example</name>
-    <description>simple deploy example</description>
+    <description>sample java example</description>
 
     <properties>
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.junit.reportPaths>target/failsafe-reports, target/surefire-reports</sonar.junit.reportPaths>
     </properties>
 
@@ -78,7 +77,6 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>

@@ -69,39 +69,21 @@ Git plugin
 
 image::jenkins/git-user-name.png[Adding Git User Name]
 
+Connecting to git (Bitbucket) also requires credentials to log into the server
+
+image::jenkins/git-credentials.png[Git credentials]
+The id `GIT_CREDENTIAL_ID` must be used.
+
 == Configure the Pipeline
+
 . Create multi branch pipeline
 . Configure branch sources
 +
-image::jenkins/branch-souces.png[jenkins branch source config]
+image::jenkins/branch-sources.png[jenkins branch source config]
 
-. Settings xml
-+
-Add settings.xml as a config file
-+
-image::jenkins/config-file.png[Config Files]
-+
-Add a `Maven settings.xml` file type.
-Give an Id `global-settings-xml`.
-The settings file is used for deploying to artifactory.
-You will need it later on.
-+
-The settings.xml file must look like
-
-    <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
-        <servers>
-            <server>
-                <id>artifactoryId</id>
-                <username>admin</username>
-                <password>password</password>
-            </server>
-        </servers>
-    </settings>
-+
-The artifactoryId `artifactoryId` is used in the deploy script.
 
 . Add environment variables
 +
 image::jenkins/env-variables.png[Jenkins environmnet variables]
++
+The two environment variables must appear for the pipeline to work.
