@@ -79,7 +79,7 @@ The id `GIT_CREDENTIAL_ID` must be used.
 . Create multi branch pipeline
 . Configure branch sources
 +
-image::jenkins/branch-souces.png[jenkins branch source config]
+image::jenkins/branch-sources.png[jenkins branch source config]
 
 . Settings xml
 +
