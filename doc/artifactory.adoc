@@ -1,8 +1,12 @@
-# Artifactory
+== Artifactory
 
 In order to deploy artifacts to Artifactory, we need a `settings.xml` as we deploy with maven.
 
-## Import the Maven settings.xml file
+=== Import the Maven settings.xml file
+
+. You will need to create credentials, user name password as for bit bucket
+. Import settings xml
+. User the settings.xml in the pipeline
 
 To import your Maven settings file, follow the steps below.
 
@@ -25,7 +29,7 @@ image::artifactory/configure_settings.png[Configure settings.xml]
 +
 Add a `Maven settings.xml` file type.
 Give an Id `settings_xml_artifactory`.
-The settings file is used for deploying to artifactory.
+The settings file is used for deploying to Artifactory.
 You will need it later on.
 +
 The settings.xml file must look like
@@ -36,10 +40,9 @@ The settings.xml file must look like
         <servers>
             <server>
                 <id>artifactoryId</id>
-                <username>admin</username>
-                <password>password</password>
             </server>
         </servers>
     </settings>
-+
-The artifactoryId `artifactoryId` is used in the deploy script.
+
+. The artifactoryId `artifactoryId` is used in the deploy script.
+. the id `settings_xml_artifactory` is used in the deploy script
