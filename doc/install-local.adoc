@@ -2,41 +2,40 @@
 
 == Install
 
-1. Install docker-compose
+. Install docker-compose
 
     sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
-
++
 or
 
     apt install docker-compose
 
-2. Create a folder to persist data
-
+. Create a folder to persist data
++
 I used `/home/frank/development/projects/takeda/data`. don't forget to change the values in the `docker-compose.yml` file to reflect this.
 
     mkdir -p /data/{jenkins,artifactory,bitbucket,sonar}
     chmod -R 777 /data
-
++
 You need to change mod, otherwise, the apps will have permission problems.
 
-3. Copy 'docker-compose.yml` file into `/data`
+. Copy 'docker-compose.yml` file into `/data`
 
-4. Start docker compose
+. Start docker compose
 
     docker-compose up
 
-5. Initial startup
+. Initial startup
 
 .. Jenkins
 
 For jenkins you will have to search in the logs for the initial password
 
-jenkins_1      | Jenkins initial setup is required. An admin user has been created and a password generated.
-jenkins_1      | Please use the following password to proceed to installation:
-jenkins_1      |
-jenkins_1      | d1b5c23620874ca3b07daf63ab3111f1
-jenkins_1      |
+jenkins_1 | Jenkins initial setup is required.
+An admin user has been created and a password generated.
+jenkins_1 | Please use the following password to proceed to installation:
+jenkins_1 | jenkins_1 | d1b5c23620874ca3b07daf63ab3111f1 jenkins_1 |
 jenkins_1      | This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 
 and once you get it, the app will be available at http://127.0.0.1:8080
