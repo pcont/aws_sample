@@ -19,7 +19,7 @@
         <java.version>11</java.version>
         <javafx-version>13</javafx-version>
         <sonar.junit.reportPaths>target/failsafe-reports, target/surefire-reports</sonar.junit.reportPaths>
-        <sonar.clover.reportPath>${project.basedir}/target/site/clover/clover.xml</sonar.clover.reportPath>
+        <sonar.clover.reportPath>target/site/clover/clover.xml</sonar.clover.reportPath>
     </properties>
 
     <dependencies>
