@@ -1,8 +1,8 @@
-= Jenkins
+== Jenkins
 
-== Configure Jenkins
+=== Configure Jenkins
 
-=== Plugins
+==== Plugins
 
 Some plugins are needed for running the pipelines
 
@@ -13,13 +13,13 @@ Used for extracting the pom's project version
 +
 For perfoming source code analysis
 
-=== Configure System
+==== Configure System
 
 Go to Manage Jenkins -> Configure System
 
 image::jenkins/manage-jenkins.png[Configure system]
 
-=== Configure SonarQube
+==== Configure SonarQube
 
 See https://medium.com/@rosaniline/setup-sonarqube-with-jenkins-declarative-pipeline-75bccdc9075f[this blog]
 and https://medium.com/@theopendle/github-jenkins-sonarqube-integration-for-java-maven-4-4-code-analysis-with-sonarqube-da569db417b6[this one]
@@ -51,7 +51,7 @@ image::jenkins/sonar-scanner.png[Sonar Scanner config]
 +
 install the quality profile you need
 
-=== Global Library
+==== Global Library
 
 Configure the Global Pipeline Libraries
 
@@ -63,7 +63,7 @@ So make sure the name is correct.
 We stored the lib at: `https://package-repo.mypkfit.com/bitbucket/scm/inf/build-pipeline.git`
 We should have some system user for accessing the repository. In the picture, this is my personal login.
 
-=== Configure Git
+==== Configure BitBucket
 
 Git plugin
 
@@ -74,7 +74,7 @@ Connecting to git (Bitbucket) also requires credentials to log into the server
 image::jenkins/git-credentials.png[Git credentials]
 The id `GIT_CREDENTIAL_ID` must be used.
 
-== Configure the Pipeline
+=== Configure the Pipeline
 
 . Create multi branch pipeline
 . Configure branch sources

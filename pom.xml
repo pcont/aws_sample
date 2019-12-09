@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.baxalta.pkc</groupId>
+        <artifactId>pkc-management-3-0</artifactId>
+        <version>3.0.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.simple</groupId>
@@ -49,11 +48,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
                 <configuration>
                     <archive>
                         <manifestEntries>
@@ -64,25 +60,43 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.jacoco</groupId>-->
+            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+            <!--                <version>0.8.5</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <goals>-->
+            <!--                            <goal>prepare-agent</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>report</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>report</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>release</id>
+            <name>libs-release</name>
+            <url>https://package-repo.mypkfit.com/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots/>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://package-repo.mypkfit.com/artifactory/libs-snapshot</url>
+        </repository>
+    </repositories>
 </project>
