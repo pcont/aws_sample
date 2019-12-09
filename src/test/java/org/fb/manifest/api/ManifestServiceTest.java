@@ -1,15 +1,17 @@
 package org.fb.manifest.api;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.Test;
 
-class ManifestServiceTest {
+import static org.junit.Assert.assertNotNull;
+
+
+public class ManifestServiceTest {
 
     private ManifestService service = new ManifestService();
 
     @Test
-    void unitTestShouldRun() {
+    public void unitTestShouldRun() {
         assertNotNull(service.manifest());
     }
 }
