@@ -19,3 +19,5 @@ Password: password
 [http://127.0.1:9000](http://127.0.1:9000)
 User: admin
 Password: admin
+
+start with `docker-compose -p tkd up`
