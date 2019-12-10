@@ -5,7 +5,8 @@
     <parent>
         <groupId>com.baxalta.pkc</groupId>
         <artifactId>pkc-management-3-0</artifactId>
-        <version>3.0.2-SNAPSHOT</version>
+        <version>3.0.3-SNAPSHOT</version>
+        <relativePath>parent-pom.xml</relativePath>
     </parent>
 
     <groupId>org.simple</groupId>
@@ -16,10 +17,7 @@
     <description>sample java example</description>
 
     <properties>
-        <java.version>11</java.version>
         <javafx-version>13</javafx-version>
-        <sonar.junit.reportPaths>target/failsafe-reports, target/surefire-reports</sonar.junit.reportPaths>
-        <sonar.clover.reportPath>target/site/clover/clover.xml</sonar.clover.reportPath>
     </properties>
 
     <dependencies>
@@ -39,11 +37,6 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -52,30 +45,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Build-Version>${project.version}</Build-Version>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.12.4</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
