@@ -29,6 +29,8 @@
         <mysql.connector.version>5.1.40</mysql.connector.version>
         <tomcat.scope>compile</tomcat.scope>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.junit.reportPaths>target/failsafe-reports, target/surefire-reports</sonar.junit.reportPaths>
+        <sonar.clover.reportPath>target/site/clover/clover.xml</sonar.clover.reportPath>
     </properties>
 
     <dependencyManagement>
@@ -184,20 +186,46 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.12.4</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
+            <!--            <plugin>-->
+            <!--                <groupId>com.atlassian.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-clover2-plugin</artifactId>-->
+            <!--                <version>4.0.6</version>-->
+            <!--                <configuration>-->
+            <!--                    <generateHtml>true</generateHtml>-->
+            <!--                    <generateXml>true</generateXml>-->
+            <!--                    <includesTestSourceRoots>true</includesTestSourceRoots>-->
+            <!--                    <includesAllSourceRoots>true</includesAllSourceRoots>-->
+            <!--                    <licenseLocation>/var/lib/jenkins/plugins/clover/clover.license</licenseLocation>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
             <plugin>
-                <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-clover2-plugin</artifactId>
-                <version>4.0.6</version>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <generateHtml>true</generateHtml>
-                    <generateXml>true</generateXml>
-                    <includesTestSourceRoots>true</includesTestSourceRoots>
-                    <includesAllSourceRoots>true</includesAllSourceRoots>
-                    <licenseLocation>/var/lib/jenkins/plugins/clover/clover.license</licenseLocation>
+                    <archive>
+                        <manifestEntries>
+                            <Build-Version>${project.version}</Build-Version>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
