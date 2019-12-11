@@ -1,0 +1,8 @@
+= Sonar
+
+Once you started sonar, you will have to install a few plugins Log in and go to Administration -> Marketplace and install
+
+. Git
+. Jacoco
+. SonarJava
+. Findbugs

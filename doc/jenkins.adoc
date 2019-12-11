@@ -1,8 +1,8 @@
-= Jenkins
+== Jenkins
 
-== Configure Jenkins
+=== Configure Jenkins
 
-=== Plugins
+==== Plugins
 
 Some plugins are needed for running the pipelines
 
@@ -13,13 +13,13 @@ Used for extracting the pom's project version
 +
 For perfoming source code analysis
 
-=== Configure System
+==== Configure System
 
 Go to Manage Jenkins -> Configure System
 
 image::jenkins/manage-jenkins.png[Configure system]
 
-=== Configure SonarQube
+==== Configure SonarQube
 
 See https://medium.com/@rosaniline/setup-sonarqube-with-jenkins-declarative-pipeline-75bccdc9075f[this blog]
 and https://medium.com/@theopendle/github-jenkins-sonarqube-integration-for-java-maven-4-4-code-analysis-with-sonarqube-da569db417b6[this one]
@@ -51,7 +51,7 @@ image::jenkins/sonar-scanner.png[Sonar Scanner config]
 +
 install the quality profile you need
 
-=== Global Library
+==== Global Library
 
 Configure the Global Pipeline Libraries
 
@@ -63,30 +63,27 @@ So make sure the name is correct.
 We stored the lib at: `https://package-repo.mypkfit.com/bitbucket/scm/inf/build-pipeline.git`
 We should have some system user for accessing the repository. In the picture, this is my personal login.
 
-=== Configure Git
+==== Configure BitBucket
 
 Git plugin
 
 image::jenkins/git-user-name.png[Adding Git User Name]
 
-== Configure the Pipeline
+Connecting to git (Bitbucket) also requires credentials to log into the server
+
+image::jenkins/git-credentials.png[Git credentials]
+The id `GIT_CREDENTIAL_ID` must be used.
+
+=== Configure the Pipeline
+
 . Create multi branch pipeline
 . Configure branch sources
 +
-image::jenkins/branch-souces.png[jenkins branch source config]
+image::jenkins/branch-sources.png[jenkins branch source config]
 
-. Settings xml
-+
-Add settings.xml as a config file
-+
-image::jenkins/config-file.png[Config Files]
-+
-Add a `Maven settings.xml` file type.
-Give an Id (e.g. global-settings-xml).
-You will need it later on.
 
-. Use the settings.xml file in Jenkins file
+. Add environment variables
 +
-    configFileProvider([configFile(fileId: 'global-settings-xml', variable: 'MAVEN_SETTINGS_XML')]) {
-        sh 'mvn deploy -s $MAVEN_SETTINGS_XML'
-    }
+image::jenkins/env-variables.png[Jenkins environmnet variables]
++
+The two environment variables must appear for the pipeline to work.

@@ -7,5 +7,10 @@
             <username>admin</username>
             <password>password</password>
         </server>
+        <server>
+            <username>admin</username>
+            <password>Baxart1!</password>
+            <id>release</id>
+        </server>
     </servers>
 </settings>
