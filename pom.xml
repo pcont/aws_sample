@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.simple</groupId>
-    <artifactId>deploy-example</artifactId>
+    <artifactId>sample</artifactId>
     <version>11.22.33.42</version>
 
     <name>simple-deploy-example</name>
