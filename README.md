@@ -1,9 +1,9 @@
 # Sample Java Project
 
-This project server as a sample project.
+This project serves as a sample project.
 
 * It shows how to integrate a java project with the deployment pipeline
-* I also provides with a [docker compose](docker/docker-compose.yml) file which allows to set up a complete toolchain locally on you machine.
+* I also provides a [docker compose](docker/docker-compose.yml) file which allows to set up a complete toolchain locally on you machine.
 * There is a [documentation](doc/adoc.adoc) about the toolchain setup. 
 
 ## User env
@@ -28,5 +28,7 @@ Password: password
 [http://127.0.1:9000](http://127.0.1:9000)
 User: admin
 Password: admin
+
+## Starting the infrstructure
 
 start with `docker-compose -p tkd up`

@@ -1,0 +1,40 @@
+=== Set up Jenkins
+
+. Point you browser at http://127.0.0.1:8080/[http://127.0.0.1:8080/].
+At initial startup, note the password from the logs to unlock Jenkins
++
+image::jenkins_inital_setup/unlock_jenkins.png[Unlock Jenkins]
++
+----
+jenkins        | *************************************************************
+jenkins        | *************************************************************
+jenkins        | *************************************************************
+jenkins        |
+jenkins        | Jenkins initial setup is required. An admin user has been created and a password generated.
+jenkins        | Please use the following password to proceed to installation:
+jenkins        |
+jenkins        | 5bdc23daa10041f8abb762118457e65c
+jenkins        |
+jenkins        | This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+jenkins        |
+jenkins        | *************************************************************
+jenkins        | *************************************************************
+jenkins        | *************************************************************
+----
+
+. Install suggested plugins
++
+image::jenkins_inital_setup/suggested_plugins.png[Suggested Plugins]
+. Create admin user
++
+User name: admin / password
++
+image::jenkins_inital_setup/admin.png[Admin user]
+. Leave url as is.
++
+image::jenkins_inital_setup/instance_config.png[Instance Config]
+. Restart
+. You are set
++
+image::jenkins_inital_setup/login.png[Login]
+

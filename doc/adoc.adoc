@@ -1,4 +1,4 @@
-== Generating the documentation
+== About the documentation
 
 The documentation is written in link:https://asciidoctor.org/[asciidoctor].
 It is easy to generate html, pdf or other format from the files.
@@ -7,5 +7,18 @@ It is easy to generate html, pdf or other format from the files.
 +
 image::adoc/asciidoc-html.png[Generate html,pdf]
 . From the console: `asciidoctor *.adoc` will generate a bunch of html file that you can view in a browser.
++
+You will obviously have to install asciidoctor on Ubuntu: `sudo apt-get install asciidoctor`
+
+== Installing and configuring the toolchain
+
+=== Start docker compose
+
+Navigate to sample/docker and
+`docker-compose -p tkd up`
+
+The project name (tkd) is used for the communication within the containers
+
+include::setup-jenkins.adoc[]
 
 include::artifactory.adoc[]

@@ -1,5 +1,7 @@
 = Local Jenkins, Artifactory, Bitbucket
 
+//depracated
+
 == Install
 
 . Install docker-compose
