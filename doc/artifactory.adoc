@@ -2,35 +2,48 @@
 
 In order to deploy artifacts to Artifactory, we need a `settings.xml` as we deploy with maven.
 
-=== Import the Maven settings.xml file
+Install the Create File Provider plugin
 
-. You will need to create credentials, user name password as for bit bucket
-. Import settings xml
-. User the settings.xml in the pipeline
+. Go to plugin manager
++
+image::jenkins/plugin-manager.png[]
 
-To import your Maven settings file, follow the steps below.
+. Install Config File Provider plugin
++
+image::artifactory/config-file-provider.png[]
+
+Add credentials for Artifactory
+
+. Create global scoped credentials (see Bitbucket or Sonar)
+
+. Initial username/password: admin / password
++
+image::artifactory/artifactoy-credentials.png[]
+
+Configure Settings.xml
+
 
 . From the main Jenkins dashboard, select Manage Jenkins.
++
+image::jenkins/configure-jenkins.png[]
+
 . Select the Managed files plugin.
-This opens the Config File Management dashboard.
 +
 image::artifactory/config-file.png[Config Files]
 . Select Add a new Config.
-. Select Maven settings.xml and click Submit.
+
+. Select Maven settings.xml.
 +
+:figure-caption!:
+.The id must be `settings_xml_artifactory` as it will be used in the scripts
 image::artifactory/manage_files.png[Select maven settings]
-. Select Server Credentials Add.
-. Enter `artifactoryId` for ServerId.
+
+.. Select Server Credentials Add.
+.. Enter `artifactoryId` for ServerId.
 This matches the <server><id> section from your settings.xml file.
-. Enter the username and password pair from the downloaded settings.xml file in the Credentials field.
-. Remove the username and password pair from the downloaded settings.xml file and copy the resulting file into the Content field.
 +
 image::artifactory/configure_settings.png[Configure settings.xml]
 +
-Add a `Maven settings.xml` file type.
-Give an Id `settings_xml_artifactory`.
-The settings file is used for deploying to Artifactory.
-You will need it later on.
 +
 The settings.xml file must look like
 
@@ -44,5 +57,52 @@ The settings.xml file must look like
         </servers>
     </settings>
 
-. The artifactoryId `artifactoryId` is used in the deploy script.
-. the id `settings_xml_artifactory` is used in the deploy script
+. The artifactoryId `artifactoryId` is used in the deploy script
+
+. The id `settings_xml_artifactory` is used in the deploy script
+
+==== Pitfall for local Artifactoy
+
+For local use, we also need to connect to Takeda's Artifactory.
+Therefore, we will also need to access that server.
+
+. Change your settings.xml file
++
+    <?xml version="1.0" encoding="UTF-8"?>
+    <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+        <pluginGroups>
+        </pluginGroups>
+        <proxies>
+        </proxies>
+        <servers>
+            <server>
+                <id>artifactoryId</id>
+            </server>
+            <server>
+                <id>release</id>
+            </server>
+        </servers>
+        <mirrors>
+        </mirrors>
+        <profiles>
+            <profile>
+                <activation>
+                    <activeByDefault>true</activeByDefault>
+                </activation>
+                <repositories>
+                    <repository>
+                        <snapshots>
+                            <enabled>false</enabled>
+                        </snapshots>
+                        <id>release</id>
+                        <name>libs-release</name>
+                        <url>https://package-repo.mypkfit.com/artifactory/libs-release</url>
+                    </repository>
+                </repositories>
+            </profile>
+        </profiles>
+    </settings>
+
+. Add the credentials for the release server

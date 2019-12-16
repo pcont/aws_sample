@@ -27,6 +27,8 @@ image::jenkins/configure-jenkins.png[]
 +
 image::bitbucket/git-user-name.png[Adding Git User Name]
 
+Create credentials
+
 . Connecting to git (Bitbucket) also requires credentials
 +
 .Select global

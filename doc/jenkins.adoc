@@ -9,9 +9,6 @@ Some plugins are needed for running the pipelines
 * Pipeline Utility Steps
 +
 Used for extracting the pom's project version
-* SonarQube Scanner
-+
-For perfoming source code analysis
 
 ==== Configure System
 
