@@ -17,7 +17,7 @@ For perfoming source code analysis
 
 Go to Manage Jenkins -> Configure System
 
-image::jenkins/manage-jenkins.png[Configure system]
+image::jenkins/configure-jenkins.png[Configure system]
 
 ==== Configure SonarQube
 
@@ -62,17 +62,6 @@ The library name `pipeline-shard` is used in the jenkins file!
 So make sure the name is correct.
 We stored the lib at: `https://package-repo.mypkfit.com/bitbucket/scm/inf/build-pipeline.git`
 We should have some system user for accessing the repository. In the picture, this is my personal login.
-
-==== Configure BitBucket
-
-Git plugin
-
-image::jenkins/git-user-name.png[Adding Git User Name]
-
-Connecting to git (Bitbucket) also requires credentials to log into the server
-
-image::jenkins/git-credentials.png[Git credentials]
-The id `GIT_CREDENTIAL_ID` must be used.
 
 === Configure the Pipeline
 
