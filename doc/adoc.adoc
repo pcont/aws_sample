@@ -17,4 +17,6 @@ include::jenkins_initial_setup.adoc[]
 
 include::bitbucket.adoc[]
 
+include::sonar.adoc[]
+
 include::artifactory.adoc[]

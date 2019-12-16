@@ -1,6 +1,6 @@
 === Setup Bitbucket
 
-. Point you browser at http://127.0.0.1:7990[http://127.0.0.1:7990]
+. Point you browser to http://127.0.0.1:7990[http://127.0.0.1:7990]
 +
 image::bitbucket/setup.png[Set upd Bitbucket]
 :figure-caption!:
