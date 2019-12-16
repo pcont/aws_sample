@@ -14,5 +14,7 @@ The project name (tkd) is used for the communication within the containers.
 The name must be `tkd`
 
 include::jenkins_initial_setup.adoc[]
+
 include::bitbucket.adoc[]
+
 include::artifactory.adoc[]
