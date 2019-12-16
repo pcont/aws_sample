@@ -38,3 +38,25 @@ image::jenkins_inital_setup/instance_config.png[Instance Config]
 +
 image::jenkins_inital_setup/login.png[Login]
 
+. Install bouncycastle API (The plugin is needed for docker)
++
+image::jenkins_inital_setup/bounycastle.png[Plugins]
+
+. install docker plugin
++
+image::jenkins_inital_setup/docker.png[Docker plugin]
++
+Configure Docker
++
+image::jenkins/configure-jenkins.png[Configure Jenkins]
++
+image::jenkins_inital_setup/configure-docker.png[Configure Docker]
++
+:figure-caption!:
+.Add `unix:///var/run/docker.sock` to the Docker Host Uri
+image::jenkins_inital_setup/configure-docker-2.png[Configure Docker host url]
++
+Test your connection.
+You should see somthing like: `Version = 18.09.7, API Version = 1.39`
+
+. Save

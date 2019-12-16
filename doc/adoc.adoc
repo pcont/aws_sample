@@ -8,17 +8,23 @@ It is easy to generate html, pdf or other format from the files.
 image::adoc/asciidoc-html.png[Generate html,pdf]
 . From the console: `asciidoctor *.adoc` will generate a bunch of html file that you can view in a browser.
 +
-You will obviously have to install asciidoctor on Ubuntu: `sudo apt-get install asciidoctor`
+You will obviously have to install asciidoctor.
++
+On Ubuntu: `sudo apt-get install asciidoctor`
 
 == Installing and configuring the toolchain
+
+This describes how to install the toolchain locally on your machine with docker.
+For production installation, it must be adjusted.
 
 === Start docker compose
 
 Navigate to sample/docker and
 `docker-compose -p tkd up`
 
-The project name (tkd) is used for the communication within the containers
+The project name (tkd) is used for the communication within the containers.
+The name must be `tkd`
 
-include::setup-jenkins.adoc[]
+include::jenkins_initial_setup.adoc[]
 
 include::artifactory.adoc[]
