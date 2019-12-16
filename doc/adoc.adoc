@@ -1,3 +1,5 @@
+= Local toolchain installation
+
 include::about.adoc[]
 
 == Installing and configuring the toolchain
@@ -5,7 +7,7 @@ include::about.adoc[]
 This describes how to install the toolchain locally on your machine with docker.
 For production installation, it must be adjusted.
 
-=== Start docker compose
+=== Docker compose
 
 Navigate to sample/docker and
 `docker-compose -p tkd up`

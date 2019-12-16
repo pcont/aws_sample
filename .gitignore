@@ -2,4 +2,5 @@ target/
 .idea
 *.iml
 
-/doc/*.html
+doc/*.html
+doc/*.pdf

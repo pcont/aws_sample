@@ -1,4 +1,4 @@
-== Artifactory
+=== Artifactory
 
 In order to deploy artifacts to Artifactory, we need a `settings.xml` as we deploy with maven.
 
