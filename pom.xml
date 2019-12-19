@@ -48,22 +48,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <!--    <repositories>-->
-    <!--        <repository>-->
-    <!--            <snapshots>-->
-    <!--                <enabled>false</enabled>-->
-    <!--            </snapshots>-->
-    <!--            <id>release</id>-->
-    <!--            <name>libs-release</name>-->
-    <!--            <url>https://package-repo.mypkfit.com/artifactory/libs-release</url>-->
-    <!--        </repository>-->
-    <!--        <repository>-->
-    <!--            <snapshots/>-->
-    <!--            <id>snapshots</id>-->
-    <!--            <name>libs-snapshot</name>-->
-    <!--            <url>https://package-repo.mypkfit.com/artifactory/libs-snapshot</url>-->
-    <!--        </repository>-->
-    <!--    </repositories>-->
 </project>
 
