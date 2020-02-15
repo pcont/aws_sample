@@ -1,5 +1,4 @@
 @Library('pipeline-shared@master') _
-defaultJarPipeline(
-        'application': 'pkc3',
-        'sonar': 'true'
+defaultI18nPipeline(
+        'application': 'pkc3'
 )
