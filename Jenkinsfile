@@ -2,4 +2,4 @@
 defaultJarPipeline(
         'application': 'pkc3',
         'sonar': 'true'
-)
+) 
